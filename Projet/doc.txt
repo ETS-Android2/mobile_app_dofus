@@ -1,0 +1,47 @@
+documentation :
+
+Tableau de caractéristiques :
+
+0 = Points de vie | 1 = pa (max = 12) | 2 = pm (max = 6) | 3 = po (max = 6)
+
+4 = Iniative | 5 = invocations | 6 = Prospection (10 Chance = 1 Prospection) | 7 = Critique
+
+8 = Soin (10 Intelligence = 1 Soin) | 9 = Sagesse (3 POUR 1) | 10 = Force | 11 = Intelligence
+
+12 = Chance | 13 = Agilité | 14 = Puissance | 15 = Fuite (10 Agilité = 1 Fuite)
+
+16 = Tacle (10 Agilité = 1 Tacle) | 17 = Esquive PA (10 Sagesse = 1 Esquive) | 18 = Esquive PM (10 Sagesse = 1 Esquive) | 19 = Retrait PM (10 Sagesse = 1 Retrait) | 20 = Retrait PA (10 Sagesse = 1 Retrait)
+
+21 = Pods (1 Force = 5 Pods)
+
+22-23-24-25-26 = Dommages Elementaires
+
+27 = Dommages
+
+28-29-30-31-32 = Résistances fixes élémentaires
+
+33-34-35-36-37 = Résistances % élémentaires
+
+38 = Dom Critique
+
+39 = Res Critique
+
+40 = Dom POussée
+
+41 = Res POussée
+
+42 = Dmg MÉlée
+
+43 = Res Mélée
+
+44 = Dmg Distance
+
+45 = Res Distance
+
+46 = Dmg Arme
+
+47 = Res Arme
+
+48 = Dmg Sort
+
+49 = Res SOrt
