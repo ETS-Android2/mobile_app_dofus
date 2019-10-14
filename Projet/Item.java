@@ -1,6 +1,6 @@
 public class Item{
 
-	public final static NBPARAM = 50;
+	public final NBPARAM = 50;
 	
 	private ItemType type;
 	
@@ -32,6 +32,11 @@ public class Item{
 
 	}
 
+	/**Constructeur d'items
+	*@param type de l'item
+	*@param ID dans la bdd
+	**/
+	
 	public Item(ItemType type, int ID){
 
 		/*GET DE LA BDD les infos via ID*/
@@ -47,10 +52,14 @@ public class Item{
 
 	}
 
-	*/
+	/**Getter du type
+	*@return le type de l'item
+	**/
+	public TypeItem getType(){return this.type;}
 
-	public getType(){return this.type;}
-
+	/**Getter de toutes les caracs
+	*@return le tableau des caracs (copie profonde)
+	**/
 	public getCaracs(){
 		retour = new int[50];
 		int i;
@@ -62,10 +71,16 @@ public class Item{
 		return retour;
 	}
 
+	/**Getter d'une carac
+	*@return la valeur de la carac
+	**/
 	public getCarac(int i){
 		return stats[i];
 	}
 	
+	/**Getter de toutes les pre-requis
+	*@return le tableau des caracs (copie profonde)
+	**/
 	public getReq(){
 		retour = new int[50];
 		int i;
@@ -77,7 +92,9 @@ public class Item{
 		return retour;
 	}
 
-
+	/**Getter de toutes les caracs fm
+	*@return le tableau des caracs fm (copie profonde)
+	**/
 	public getFm(){
 		retour = new int[50];
 		int i;
