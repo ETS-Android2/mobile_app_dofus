@@ -118,7 +118,7 @@ public class Item{
 		int i;
 		for(i=0;i<NBPARAM;i++){
 			
-			retour[i] = this.stats[i];
+			retour[i] = this.stats[i]; 
 			
 		}
 		return retour;
