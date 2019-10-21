@@ -48,7 +48,7 @@ public class Item{
 
 	}
 	
-	/*Pour les items custom : Gestion à part de la bdd (local)
+	/*Pour les items custom : Gestion  part de la bdd (local)
 
 	public Item(int ID){
 
@@ -76,7 +76,7 @@ public class Item{
 
 		for(i=0;i<NBPARAM;i++){
 			
-			this.stats[i] = base.getCaracs()[i];
+			this.stats[i] = base.getCarac(i);
 			
 		}
 
