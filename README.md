@@ -10,3 +10,5 @@ Création d'une application Android
 * Align : ok
 * Job : à faire
 * Personnage : à faire
+
+GO=oogle Doc : https://docs.google.com/document/d/1RILmTEmcRNxojienIsmgZbw-XUJksdirTv0JqVJRrMc/edit
