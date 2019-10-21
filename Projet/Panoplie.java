@@ -11,7 +11,7 @@ public class Panoplie{
 
 	//---------------Constru---------------------
 
-	public Panoplie(){
+	public void Panoplie(){
 
 		items = null;
 		stats = new int[NBPARAM];
@@ -20,7 +20,7 @@ public class Panoplie{
 	}
 
 
-	public Panoplie(Item[] items, int[] stats, int ID){
+	public void Panoplie(Item[] items, int[] stats, int ID){
 
 		this.ID = ID;
 		int i;
@@ -38,7 +38,7 @@ public class Panoplie{
 
 	}
 
-	public Panoplie(Panoplie base){
+	public void Panoplie(Panoplie base){
 
 		int i;
 
