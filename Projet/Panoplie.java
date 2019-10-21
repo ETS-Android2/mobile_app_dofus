@@ -1,4 +1,4 @@
-public class Item{
+public class Panoplie{
 
 	public final NBPARAM = 50;
 
@@ -66,33 +66,52 @@ public class Item{
 	/**Getter de toutes les caracs
 	*@return le tableau des caracs (copie profonde)
 	**/
-	public int[] getCaracs(){
+	public int[][] getCaracs(){
 		retour = new int[this.items.length][NBPARAM];
 		int i, j;
 		for(i=0;i<items.length;i++){
 			
 			for(j=0;j<NBPARAM;j++){
 
-				retour[i][j] = this.stats[i](j]
+				retour[i][j] = this.stats[i][j];
 			}
 			
 		}
 		return retour;
 	}
 
-	/**Getter d'une carac
+
+	/**Getter de toutes les caracs d'une range
+	*@return le tableau des caracs (copie profonde)
+	**/
+	public int[] getCaracs(int i){
+
+		retour = new int[NBPARAM];
+		int j;
+
+		for(j=0;j<NBPARAM;j++){
+
+			retour[j] = this.stats[i][j];
+		}
+			
+		return retour;
+
+	}
+
+
+	/**Getter d'une carac d'un nb d'objet
 	*@return la valeur de la carac
 	**/
-	public int getCarac(int i){
-		return stats[i];
+	public int getCarac(int i, int j){
+		return stats[i][j];
 	}
 	
 
 	/**Setter d'une carac
 	*@param la valeur de la carac
 	**/
-	public void setCarac(int i, int val){
-		this.stats[i] = val;
+	public void setCarac(int i, int j, int val){
+		this.stats[i][j] = val;
 	}
 
 
@@ -114,86 +133,6 @@ public class Item{
 		}
 	}
 
-
-	//---------------Prereq----------------------
-
-	/**Getter de toutes les pre-requis
-	*@return le tableau des caracs (copie profonde)
-	**/
-
-	public int[] getReq(){
-		retour = new int[NBPARAM];
-		int i;
-		for(i=0;i<NBPARAM;i++){
-			
-			retour[i] = this.required[i];
-			
-		}
-		return retour;
-	}
-
-	/**Setter de tous les pre req
-	*@param le tableau des pre req (copie profonde)
-	**/
-	public void setReq(int [] tab){
-
-		if(tab.length == NBPARAM){
-
-			this.stats = new int[NBPARAM];
-			int i;
-			for(i=0;i<NBPARAM;i++){
-			
-				this.stats[i] = tab[i];
-			
-			}
-
-		}
-	}
-
-
-	//---------------Prereq----------------------
-
-	/**Getter de toutes les caracs fm
-	*@return le tableau des caracs fm (copie profonde)
-	**/
-	public int[] getFm(){
-		retour = new int[NBPARAM];
-		int i;
-		for(i=0;i<NBPARAM;i++){
-			
-			retour[i] = this.fm[i];
-			
-		}
-		return retour;
-	}
-
-	/**Setter de fm (RESET)
-	*@param le tableau de fm (copie profonde)
-	**/
-	public void setFm(int [] tab){
-
-		if(tab.length == NBPARAM){
-
-			this.stats = new int[NBPARAM];
-			int i;
-			for(i=0;i<NBPARAM;i++){
-			
-				this.stats[i] = tab[i];
-			
-			}
-
-		}
-	}
-
-	/**Setter de fm (SIMPLE)
-	*@param la case du tableau et la valeur)
-	**/
-	public void setFm(int i, int val){
-
-		this.stats[i] = val;
-	}
-
-
 	//---------------Panoplie----------------------
 
 	/**Getter de la panoplie
@@ -201,16 +140,8 @@ public class Item{
 	**/
 	public Panoplie getPanoplie(){
 
-		return new Panoplie(this.panoplie);
+		return new Panoplie(this);
 
-	}
-	
-	/**Setter de la panoplie
-	*@param la panoplie
-	**/
-	public void setPanoplie(Panoplie panoplie){
-
-		this.panoplie = new Panoplie(this.panoplie):
 	}
 
 
@@ -226,39 +157,6 @@ public class Item{
 	**/
 	public void setID(int ID){this.ID = ID;}
 
-	//---------------desc----------------------
-
-	/**Getter de la desc
-	*@return la desc
-	**/
-	public String getDesc(){
-
-		return this.desc;
-	}
-
-	/**Setter de la desc
-	*@param la desc
-	**/
-	public void setDesc(String desc){
-		this.desc = desc
-	}
-
-
-	//---------------niveau----------------------
-
-	/**Getter du niveau
-	*@return le niveau
-	**/
-	public int getLevel(){
-		return this.niveau;
-	}
-
-	/**Setter du niveau
-	*@param le niveau
-	**/
-	public void setLevel(int niveau){
-		this.niveau = niveau;
-	}
 
 }
 
