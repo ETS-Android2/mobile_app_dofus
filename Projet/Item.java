@@ -1,6 +1,6 @@
 public class Item{
 
-	public static final NBPARAM = 50;
+	public static final int NBPARAM = 50;
 	
 	private ItemType type;
 	

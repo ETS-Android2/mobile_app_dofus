@@ -1,6 +1,6 @@
 public class Panoplie{
 
-	public static final NBPARAM = 50;
+	public static final int NBPARAM = 50;
 
 	private Item[] items;
 	/*Caracs*/
