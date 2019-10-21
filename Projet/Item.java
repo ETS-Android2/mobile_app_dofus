@@ -23,7 +23,7 @@ public class Item{
 
 	//---------------Constru---------------------
 
-	public void Item(){
+	public Item(){
 
 		type = ItemType.DOFUS;
 		required = new int[NBPARAM];
@@ -41,7 +41,7 @@ public class Item{
 	*@param ID dans la bdd
 	**/
 	
-	public void Item(ItemType type, int ID){
+	public Item(ItemType type, int ID){
 
 		/*GET DE LA BDD les infos via ID*/
 		this.type = type;
@@ -54,13 +54,11 @@ public class Item{
 
 		/*requete pour get les caracs de l'item dans la bdd*/
 
-	}
-
 
 	/**Constructeur par copie
 	*@param item a copier
 	**/
-	public void Item(Item base){
+	public Item(Item base){
 
 		int i;
 		this.type = base.getType();
