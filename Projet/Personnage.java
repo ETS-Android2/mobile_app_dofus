@@ -38,8 +38,7 @@ public class Personnage {
 	
 	public Personnage(Personnage p) {
 		job = new job(p.job);
-		this(p.level, p.id, p.cla, p.success, p.kolizeum, p.al, job, p.carac, p.equipement,
-		p.spouse, p.guild, p.alliance, p.server);
+		this(p.level, p.id, p.cla, p.success, p.kolizeum, p.al, job, p.carac, p.equipement, p.spouse, p.guild, p.alliance, p.server);
 	}
 
 	
@@ -75,7 +74,13 @@ public class Personnage {
 		return carac;
 	}
 	
-	public Item[] getEquipement(){}
+	public Item[] getEquipement(){
+		return equipement;
+	}
+	
+	public Personnage getSpouse(){
+		return Spouse;
+	}
 	
 	// public void setNom(String nom) {
 		// this.nom = nom;
