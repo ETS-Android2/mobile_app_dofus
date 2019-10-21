@@ -1,6 +1,6 @@
 public class Panoplie{
 
-	public final NBPARAM = 50;
+	public static final NBPARAM = 50;
 
 	private Item[] items;
 	/*Caracs*/
@@ -132,6 +132,41 @@ public class Panoplie{
 
 		}
 	}
+
+	//---------------Item--------------------------
+
+	/**Getter des items
+	*@return les items
+	**/
+	public Item[] getItems(){
+
+		Item[] retour = new Item[this.items.length];
+
+		for(i=0;i<this.items.length;i++){
+			
+			retour[i] = this.items[i];
+			
+		}
+
+	}
+
+	/**Getter du nombre d'items
+	*@return le nombre d'items
+	**/
+	public int getNbItems(){
+
+		return this.items.length;
+	}
+
+	/**Getter d'un item
+	*@return l'item
+	**/
+	public Item getItem(int i){
+
+		return new Item(this.items[i]);
+	}
+
+
 
 	//---------------Panoplie----------------------
 
