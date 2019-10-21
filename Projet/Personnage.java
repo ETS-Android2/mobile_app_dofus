@@ -75,6 +75,8 @@ public class Personnage {
 		return carac;
 	}
 	
+	public Item[] getEquipement(){}
+	
 	// public void setNom(String nom) {
 		// this.nom = nom;
 	// }
