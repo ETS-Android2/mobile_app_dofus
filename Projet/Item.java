@@ -252,7 +252,7 @@ public class Item{
 	**/
 	public void setPanoplie(Panoplie panoplie){
 
-		this.panoplie = new Panoplie(this.panoplie):
+		this.panoplie = new Panoplie(this.panoplie);
 	}
 
 
@@ -282,7 +282,7 @@ public class Item{
 	*@param la desc
 	**/
 	public void setDesc(String desc){
-		this.desc = desc
+		this.desc = desc;
 	}
 
 
