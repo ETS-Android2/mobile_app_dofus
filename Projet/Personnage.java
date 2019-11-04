@@ -14,6 +14,10 @@ public class Personnage {
 	private String alliance;
 	private String server;
 	
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////					Constructors                  ///////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/**Constructor of the class
 	*@param lvl the level of the character
@@ -54,6 +58,12 @@ public class Personnage {
 	public Personnage() {
 		this(0, 0, Classes.CRA, 0, 0, Align.NEUTRAL, null, null, null, null, "Overgeared", "alliance", "server");
 	}
+	
+	
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////					Getters and Setters                  ////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	/**Getter for the character's level
 	*@return level the character's level
@@ -111,34 +121,39 @@ public class Personnage {
 		this.job = job;
 	}
 	
+	/**Getter for the character's stats
+	*@return carac the character's stats
+	**/
 	public int[] getCarac() {
 		return carac;
 	}
 	
+	/**Getter for the character's equipement
+	*@return equipement the character's equipement
+	**/
 	public Item[] getEquipement(){
 		return equipement;
 	}
 	
+	/**Getter for the character's spouse
+	*@return spouse the character's spouse
+	**/
 	public Personnage getSpouse(){
 		return spouse;
 	}
 	
-	// public void setNom(String nom) {
-		// this.nom = nom;
-	// }
-
-	// /**
-	// * Retourne le prénom de la personne.
-	// * @return le prénom de la personne
-	// */    
-	// public String getPrenom() {
-		// return prenom;
-	// }
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////					Other Methods                 ///////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	
-	// public String toString(){
-		// return(nom+" "+prenom);	
-	// }
+	/**toString for the character
+	*@return the character as a String
+	**/
+	public String toString(){
+		return(nom+" "+prenom);	
+	}
 	
 	// public Personne clone() throws CloneNotSupportedException { 
         // Personne ref = (Personne) super.clone();
@@ -146,7 +161,4 @@ public class Personnage {
 		// return ref ; 
     // } 
 	
-	// public boolean equals(Personne p) {
-		// return ((this.nom.equals(p.nom))&&(this.prenom.equals(p.prenom)));
-	// }
 }
