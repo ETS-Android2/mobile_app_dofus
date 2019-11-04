@@ -20,7 +20,7 @@ public class Panoplie{
 	}
 
 
-	public Panoplie(Item[] items, int[] stats, int ID){
+	public Panoplie(Item[] items, int[][] stats, int ID){
 
 		this.ID = ID;
 		int i;
@@ -118,20 +118,20 @@ public class Panoplie{
 	/**Setter de toutes les caracs
 	*@param le tableau des caracs (copie profonde)
 	**/
-	// public void setCaracs(int[] tab){
+	public void setCaracs(int[] tab){
 
-		// if(tab.length == NBPARAM){
+		if(tab.length == NBPARAM){
 
-			// this.stats = new int[NBPARAM];
-			// int i;
-			// for(i=0;i<NBPARAM;i++){
+			this.stats = new int[NBPARAM];
+			int i;
+			for(i=0;i<NBPARAM;i++){
 			
-				// this.stats[i] = tab[i];
+				this.stats[i] = tab[i];
 			
-			// }
+			}
 
-		// }
-	// }
+		}
+	}
 
 	//---------------Item--------------------------
 
@@ -147,7 +147,7 @@ public class Panoplie{
 			retour[i] = this.items[i];
 			
 		}
-
+		return retour;
 	}
 
 	/**Getter du nombre d'items
