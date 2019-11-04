@@ -115,23 +115,23 @@ public class Panoplie{
 	}
 
 
-	/**Setter de toutes les caracs
-	*@param le tableau des caracs (copie profonde)
-	**/
-	public void setCaracs(int[] tab){
+	// /**Setter de toutes les caracs
+	// *@param le tableau des caracs (copie profonde)
+	// **/
+	// public void setCaracs(int[] tab, int nbItems){
 
-		if(tab.length == NBPARAM){
+		// if(tab.length == NBPARAM){
 
-			this.stats = new int[NBPARAM];
-			int i;
-			for(i=0;i<NBPARAM;i++){
+			// this.stats = new int[items.length -1][NBPARAM];
+			// int i;
+			// for(i=0;i<NBPARAM;i++){
 			
-				this.stats[i] = tab[i];
+				// this.stats[i] = tab[i];
 			
-			}
+			// }
 
-		}
-	}
+		// }
+	// }
 
 	//---------------Item--------------------------
 
