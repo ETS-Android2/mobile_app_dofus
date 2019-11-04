@@ -72,11 +72,25 @@ public class Personnage {
 		return level;
 	}
 	
+	/**Setter for the character's level
+	*@param level the new character's level
+	**/
+	public void setLevel(int level) {
+		this.level = level;
+	}
+	
 	/**Getter for the character's id
 	*@return id the character's id
 	**/
 	public int getId() {
 		return id;
+	}
+	
+	/**Setter for the character's id
+	*@param id the new character's id
+	**/
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	/**Getter for the character's class
@@ -86,11 +100,25 @@ public class Personnage {
 		return cla;
 	}
 	
+	/**Setter for the character's class
+	*@param cla the new character's class
+	**/
+	public void setCla(Classes cla) {
+		this.cla = cla;
+	}
+	
 	/**Getter for the character's success points
 	*@return success the character's success points
 	**/
 	public int getSuccess() {
 		return success;
+	}
+	
+	/**Setter for the character's success points
+	*@param success the new character's success points
+	**/
+	public void getSuccess(int success) {
+		this.success = success;
 	}
 	
 	/**Getter for the character's kolizeum ranking
@@ -100,11 +128,25 @@ public class Personnage {
 		return kolizeum;
 	}
 	
+	/**Setter for the character's kolizeum ranking
+	*@param kolizeum the new character's kolizeum ranking
+	**/
+	public void getKolizeum(int kolizeum) {
+		this.kolizeum = kolizeum;
+	}
+	
 	/**Getter for the character's alignment
 	*@return al the character's alignment
 	**/
 	public Align getAl() {
 		return al;
+	}
+	
+	/**Setter for the character's alignment
+	*@param al the new character's alignment
+	**/
+	public void getAl(Align al) {
+		this.al = al;
 	}
 	
 	/**Getter for the character's job
@@ -128,6 +170,14 @@ public class Personnage {
 		return carac;
 	}
 	
+	/**Setter for the character's stats
+	*@param carac the new character's stats
+	**/
+	public void setCarac(int[] carac) {
+		this.carac = carac;
+	}
+	
+	
 	/**Getter for the character's equipement
 	*@return equipement the character's equipement
 	**/
@@ -135,11 +185,33 @@ public class Personnage {
 		return equipement;
 	}
 	
+	/**Setter for the character's equipement
+	*@param equipement the new character's equipement
+	**/
+	public void setEquipement(Item[] equipement){
+		this.equipement = equipement;
+	}
+	
+	/**Setter for the character's equipement
+	*@param equipement the new piece of character's equipement
+	*@param position the position of the equipement
+	**/
+	public void setEquipement(Item equipement,int position){
+		this.equipement[position] = equipement;
+	}
+	
 	/**Getter for the character's spouse
 	*@return spouse the character's spouse
 	**/
 	public Personnage getSpouse(){
 		return spouse;
+	}
+	
+	/**Setter for the character's spouse
+	*@param spouse the character's new spouse
+	**/
+	public void setSpouse(Personnage spouse){
+		this.spouse = spouse;
 	}
 	
 	
@@ -152,7 +224,7 @@ public class Personnage {
 	*@return the character as a String
 	**/
 	public String toString(){
-		return(nom+" "+prenom);	
+		return(cla+" level "+level+", has "+success+" success points and is ranked "+kolizeum+"at the kolizeum"+al+job+carac+equipement+spouse+guild+alliance+server);	
 	}
 	
 	// public Personne clone() throws CloneNotSupportedException { 
