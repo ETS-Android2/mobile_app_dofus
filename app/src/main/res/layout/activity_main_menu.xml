@@ -21,8 +21,8 @@
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="152dp"
-        android:layout_height="78dp"
+        android:layout_width="150dp"
+        android:layout_height="52dp"
         android:layout_marginTop="68dp"
         android:text="@string/main_menu_button1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,8 +31,8 @@
 
     <Button
         android:id="@+id/button5"
-        android:layout_width="152dp"
-        android:layout_height="78dp"
+        android:layout_width="154dp"
+        android:layout_height="59dp"
         android:layout_marginTop="28dp"
         android:layout_marginBottom="28dp"
         android:text="@string/main_menu_button2"
@@ -43,9 +43,10 @@
 
     <Button
         android:id="@+id/button6"
-        android:layout_width="152dp"
-        android:layout_height="78dp"
+        android:layout_width="155dp"
+        android:layout_height="53dp"
         android:layout_marginBottom="44dp"
+        android:onClick="loadNews"
         android:text="@string/main_menu_button3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

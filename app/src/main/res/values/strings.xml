@@ -1,6 +1,15 @@
 <resources>
+
+    <!-- Base application -->
     <string name="app_name">DofusMaker</string>
+    <string name="test_string">DofuMaker</string>
+
+    <!-- Main Menu -->
     <string name="main_menu_button1">Créer un personnage</string>
     <string name="main_menu_button2">Mes personnages</string>
     <string name="main_menu_button3">Les actualités du jeu</string>
+
+    <!-- News Menu -->
+    <string name="news_menu_headtitle">Les actualités du jeu</string>
+
 </resources>
