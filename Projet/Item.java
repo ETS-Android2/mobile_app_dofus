@@ -23,7 +23,7 @@ public class Item{
 
 	//---------------Constru---------------------
 
-	public void Item(){
+	public Item(){
 
 		type = ItemType.DOFUS;
 		required = new int[NBPARAM];
@@ -41,7 +41,7 @@ public class Item{
 	*@param ID dans la bdd
 	**/
 	
-	public void Item(ItemType type, int ID){
+	public Item(ItemType type, int ID){
 
 		/*GET DE LA BDD les infos via ID*/
 		this.type = type;
@@ -54,13 +54,11 @@ public class Item{
 
 		/*requete pour get les caracs de l'item dans la bdd*/
 
-	}
-
 
 	/**Constructeur par copie
 	*@param item a copier
 	**/
-	public void Item(Item base){
+	public Item(Item base){
 
 		int i;
 		this.type = base.getType();
@@ -120,7 +118,7 @@ public class Item{
 		int i;
 		for(i=0;i<NBPARAM;i++){
 			
-			retour[i] = this.stats[i];
+			retour[i] = this.stats[i]; 
 			
 		}
 		return retour;
@@ -254,7 +252,7 @@ public class Item{
 	**/
 	public void setPanoplie(Panoplie panoplie){
 
-		this.panoplie = new Panoplie(this.panoplie):
+		this.panoplie = new Panoplie(this.panoplie);
 	}
 
 
@@ -284,7 +282,7 @@ public class Item{
 	*@param la desc
 	**/
 	public void setDesc(String desc){
-		this.desc = desc
+		this.desc = desc;
 	}
 
 
