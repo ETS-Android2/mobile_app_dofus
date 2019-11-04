@@ -98,7 +98,7 @@ public class Item{
 	/**Getter du type
 	*@return le type de l'item
 	**/
-	public TypeItem getType(){return this.type;}
+	public ItemType getType(){return this.type;}
 
 
 	/**Setter du type
@@ -114,7 +114,7 @@ public class Item{
 	*@return le tableau des caracs (copie profonde)
 	**/
 	public int[] getCaracs(){
-		retour = new int[NBPARAM];
+		int[] retour = new int[NBPARAM];
 		int i;
 		for(i=0;i<NBPARAM;i++){
 			
@@ -164,7 +164,7 @@ public class Item{
 	**/
 
 	public int[] getReq(){
-		retour = new int[NBPARAM];
+		int[] retour = new int[NBPARAM];
 		int i;
 		for(i=0;i<NBPARAM;i++){
 			
@@ -199,7 +199,7 @@ public class Item{
 	*@return le tableau des caracs fm (copie profonde)
 	**/
 	public int[] getFm(){
-		retour = new int[NBPARAM];
+		int[] retour = new int[NBPARAM];
 		int i;
 		for(i=0;i<NBPARAM;i++){
 			

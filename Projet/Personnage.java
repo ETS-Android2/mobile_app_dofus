@@ -12,14 +12,14 @@ public class Personnage {
 	private Personnage spouse;
 	private String guild;
 	private String alliance;
-	private Servers server;
+	private String server;
 	
 
 	/**
 	*
 	*/
 	public Personnage(int lvl, int id, Classes cla, int success, int kolizeum, Align al, Job job, int[] carac,
-		Item[] equipement, Personnage spouse, String guild, String alliance, Servers server) {
+		Item[] equipement, Personnage spouse, String guild, String alliance, String server) {
 		this.level = lvl;
 		this.id = id;
 		this.cla = cla;
@@ -37,7 +37,7 @@ public class Personnage {
 	}
 	
 	public Personnage(Personnage p) {
-		job = new job(p.job);
+		job = new Job(p.job);
 		this(p.level, p.id, p.cla, p.success, p.kolizeum, p.al, job, p.carac, p.equipement, p.spouse, p.guild, p.alliance, p.server);
 	}
 
@@ -79,7 +79,7 @@ public class Personnage {
 	}
 	
 	public Personnage getSpouse(){
-		return Spouse;
+		return spouse;
 	}
 	
 	// public void setNom(String nom) {

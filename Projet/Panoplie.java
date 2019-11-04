@@ -14,7 +14,7 @@ public class Panoplie{
 	public Panoplie(){
 
 		items = null;
-		stats = new int[NBPARAM];
+		int[][] stats = new int[0][NBPARAM];
 		ID = -1;
 
 	}
@@ -24,10 +24,10 @@ public class Panoplie{
 
 		this.ID = ID;
 		int i;
-		for(i=0;i<NBPARAM;i++){
-			
-			this.stats[i] = stats[i];
-			
+		for(i=0;i<items.length -1;i++){
+			for (int j=0; j<stats.length; j++){
+				this.stats[i][j] = stats[i][j];
+			}
 		}
 
 		for(i=0;i<items.length;i++){
@@ -67,7 +67,7 @@ public class Panoplie{
 	*@return le tableau des caracs (copie profonde)
 	**/
 	public int[][] getCaracs(){
-		retour = new int[this.items.length][NBPARAM];
+		int[][] retour = new int[this.items.length][NBPARAM];
 		int i, j;
 		for(i=0;i<items.length;i++){
 			
@@ -86,7 +86,7 @@ public class Panoplie{
 	**/
 	public int[] getCaracs(int i){
 
-		retour = new int[NBPARAM];
+		int[] retour = new int[NBPARAM];
 		int j;
 
 		for(j=0;j<NBPARAM;j++){
@@ -118,20 +118,20 @@ public class Panoplie{
 	/**Setter de toutes les caracs
 	*@param le tableau des caracs (copie profonde)
 	**/
-	public void getCaracs(int[] tab){
+	// public void setCaracs(int[] tab){
 
-		if(tab.length == NBPARAM){
+		// if(tab.length == NBPARAM){
 
-			this.stats = new int[NBPARAM];
-			int i;
-			for(i=0;i<NBPARAM;i++){
+			// this.stats = new int[NBPARAM];
+			// int i;
+			// for(i=0;i<NBPARAM;i++){
 			
-				this.stats[i] = tab[i];
+				// this.stats[i] = tab[i];
 			
-			}
+			// }
 
-		}
-	}
+		// }
+	// }
 
 	//---------------Item--------------------------
 
@@ -142,7 +142,7 @@ public class Panoplie{
 
 		Item[] retour = new Item[this.items.length];
 
-		for(i=0;i<this.items.length;i++){
+		for(int i=0;i<this.items.length;i++){
 			
 			retour[i] = this.items[i];
 			
