@@ -1,4 +1,3 @@
 public enum Align {
-	NEUTRAL, BONTA, BRAKMAR;
-	
+	NEUTRAL, BONTA, BRAKMAR;	
 }
