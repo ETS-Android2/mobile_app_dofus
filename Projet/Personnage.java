@@ -224,7 +224,7 @@ public class Personnage {
 	*@return the character as a String
 	**/
 	public String toString(){
-		return(cla+" level "+level+", has "+success+" success points and is ranked "+kolizeum+"at the kolizeum"+al+job+carac+equipement+spouse+guild+alliance+server);	
+		return(cla+" level "+level+", has "+success+" success points and is ranked "+kolizeum+" at the kolizeum. "+al+" "+job+" "+carac+" "+equipement+" is married to {{{{"+spouse+"}}}} and is part of "+guild+" which is part of "+alliance+" in "+server);	
 	}
 	
 	// public Personne clone() throws CloneNotSupportedException { 

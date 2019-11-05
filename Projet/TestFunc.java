@@ -2,7 +2,9 @@ public class TestFunc {
 
 	public static void main(String[] args){
 		Personnage chara = new Personnage();
-		System.out.println("test");
+		Personnage chara2 = new Personnage();
+		chara.setSpouse(chara2);
+		System.out.println(chara);
 	}
 
 }
