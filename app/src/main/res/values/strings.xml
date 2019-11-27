@@ -11,5 +11,6 @@
 
     <!-- News Menu -->
     <string name="news_menu_headtitle">Les actualités du jeu</string>
+    <string name="refresh">Actualiser</string>
 
 </resources>
