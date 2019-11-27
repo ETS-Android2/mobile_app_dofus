@@ -1,7 +1,13 @@
 public class Personnage {
 
-	private int level;
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////				Attributes		                 ////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	private int id;
+	private int level;
+	private String name;
 	private Classes cla;
 	private int success;
 	private int kolizeum;
@@ -24,15 +30,40 @@ public class Personnage {
 	*@param id the ID of the character
 	*@param
 	**/
-	public Personnage(int lvl, int id, Classes cla, int success, int kolizeum, Align al, Job job, int[] carac,
+	public Personnage(int id, int lvl, String name, Classes cla, int success, int kolizeum, Align al, Job job, int[] carac,
 		Item[] equipement, Personnage spouse, String guild, String alliance, String server) {
-		this.level = lvl;
 		this.id = id;
+		this.level = lvl;
+		this.name = name;
 		this.cla = cla;
 		this.success = success;
 		this.kolizeum = kolizeum;
 		this.al = al;
 		this.job = job;
+		this.carac = carac;
+		this.equipement = equipement;
+		this.spouse = spouse;
+		this.guild = guild;
+		this.alliance = alliance;
+		this.server = server;
+		
+	}
+	
+	/**Constructor of the class
+	*@param lvl the level of the character
+	*@param id the ID of the character
+	*@param
+	**/
+	public Personnage(int id, int lvl, String name, Classes cla, int success, int kolizeum, Align al, JobEnum jobn, int joblvl, int[] carac,
+		Item[] equipement, Personnage spouse, String guild, String alliance, String server) {
+		this.id = id;
+		this.level = lvl;
+		this.name = name;
+		this.cla = cla;
+		this.success = success;
+		this.kolizeum = kolizeum;
+		this.al = al;
+		this.job = new Job(jobn, joblvl);
 		this.carac = carac;
 		this.equipement = equipement;
 		this.spouse = spouse;
@@ -47,7 +78,7 @@ public class Personnage {
 	*@param p the character to copy
 	**/
 	public Personnage(Personnage p) {
-		this(p.level, p.id, p.cla, p.success, p.kolizeum, p.al, null, p.carac, p.equipement, p.spouse, p.guild, p.alliance, p.server);
+		this(p.id, p.level, p.name, p.cla, p.success, p.kolizeum, p.al, null, p.carac, p.equipement, p.spouse, p.guild, p.alliance, p.server);
 		job = new Job(p.job);
 		this.setJob(job);
 	}
@@ -56,7 +87,7 @@ public class Personnage {
 	/**Default Constructor of the class
 	**/
 	public Personnage() {
-		this(0, 0, Classes.CRA, 0, 0, Align.NEUTRAL, null, null, null, null, "Overgeared", "alliance", "server");
+		this(0, 0, "Grid", Classes.CRA, 0, 0, Align.NEUTRAL, null, null, null, null, "Overgeared", "alliance", "server");
 	}
 	
 	
@@ -64,6 +95,20 @@ public class Personnage {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////					Getters and Setters                  ////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/**Getter for the character's id
+	*@return id the character's id
+	**/
+	public int getId() {
+		return id;
+	}
+	
+	/**Setter for the character's id
+	*@param id the new character's id
+	**/
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 	/**Getter for the character's level
 	*@return level the character's level
@@ -79,18 +124,18 @@ public class Personnage {
 		this.level = level;
 	}
 	
-	/**Getter for the character's id
-	*@return id the character's id
+	/**Getter for the character's name
+	*@return name the character's name
 	**/
-	public int getId() {
-		return id;
+	public String getName() {
+		return name;
 	}
 	
-	/**Setter for the character's id
-	*@param id the new character's id
+	/**Setter for the character's name
+	*@param name the new character's name
 	**/
-	public void setId(int id) {
-		this.id = id;
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	/**Getter for the character's class
@@ -224,7 +269,7 @@ public class Personnage {
 	*@return the character as a String
 	**/
 	public String toString(){
-		return(cla+" level "+level+", has "+success+" success points and is ranked "+kolizeum+" at the kolizeum. "+al+" "+job+" "+carac+" "+equipement+" is married to {{{{"+spouse+"}}}} and is part of "+guild+" which is part of "+alliance+" in "+server);	
+		return(name+", "+cla+" level "+level+", has "+success+" success points and is ranked "+kolizeum+" at the kolizeum. "+al+" "+job+" "+carac+" "+equipement+" is married to {{{{"+spouse.getName()+"}}}} and is part of "+guild+" which is part of "+alliance+" in "+server+"\n");	
 	}
 	
 	// public Personne clone() throws CloneNotSupportedException { 
