@@ -93,7 +93,7 @@ public class Personnage {
 	/**Default Constructor of the class
 	**/
 	public Personnage() {
-		this(0, 0, "Grid", Classes.CRA, 0, 0, Align.NEUTRAL, null, null, null, null, "Overgeared", "alliance", "server");
+		this(0, 10, "Grid", Classes.CRA, 0, 0, Align.NEUTRAL, null, null, null, null, "Overgeared", "alliance", "server");
 	}
 	
 	
@@ -182,7 +182,7 @@ public class Personnage {
 	/**Setter for the character's kolizeum ranking
 	*@param kolizeum the new character's kolizeum ranking
 	**/
-	public void getKolizeum(int kolizeum) {
+	public void setKolizeum(int kolizeum) {
 		this.kolizeum = kolizeum;
 	}
 	
@@ -196,7 +196,7 @@ public class Personnage {
 	/**Setter for the character's alignment
 	*@param al the new character's alignment
 	**/
-	public void getAl(Align al) {
+	public void setAl(Align al) {
 		this.al = al;
 	}
 	

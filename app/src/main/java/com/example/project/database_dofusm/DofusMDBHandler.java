@@ -10,6 +10,11 @@ import com.example.project.appclasses.Personnage;
 import com.example.project.appclasses.Equipement;
 import com.example.project.enumdofusm.Align;
 import com.example.project.enumdofusm.Classes;
+import com.example.project.enumdofusm.JobEnum;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class DofusMDBHandler extends SQLiteOpenHelper {
  
@@ -73,38 +78,38 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
 			+ KEY_ALIGNEMENT_ID + " INTEGER,"
 			+ KEY_JOB_ID + " INTEGER,"
 			+ KEY_EQUIPEMENT_ID + " INTEGER,"
-			+KEY_CREATED_AT + " DATETIME" + ")";
+			+ KEY_CREATED_AT + " DATETIME" + ");";
  
     // Classe table create statement
     private static final String CREATE_TABLE_CLASSE = "CREATE TABLE " 
 			+ TABLE_CLASSE + "(" + KEY_ID + " INTEGER PRIMARY KEY,"
 			+ KEY_CLASSE_NAME + " TEXT,"
-            + KEY_CREATED_AT + " DATETIME" + ")";
+            + KEY_CREATED_AT + " DATETIME" + ");";
  
     // Alignement table create statement
     private static final String CREATE_TABLE_ALIGNEMENT = "CREATE TABLE "
             + TABLE_ALIGNEMENT + "(" + KEY_ID + " INTEGER PRIMARY KEY,"
 			+ KEY_ALIGNEMENT_NAME + " TEXT,"
-            + KEY_CREATED_AT + " DATETIME" + ")";
+            + KEY_CREATED_AT + " DATETIME" + ");";
 			
 	// JobName table create statement
     private static final String CREATE_TABLE_JOBNAME = "CREATE TABLE "
             + TABLE_JOBNAME + "(" + KEY_ID + " INTEGER PRIMARY KEY,"
 			+ KEY_JOBNAME_NAME + " TEXT,"
-            + KEY_CREATED_AT + " DATETIME" + ")";
+            + KEY_CREATED_AT + " DATETIME" + ");";
 	
 	// Job table create statement
 	private static final String CREATE_TABLE_JOB = "CREATE TABLE "
             + TABLE_JOB + "(" + KEY_ID + " INTEGER PRIMARY KEY,"
 			+ KEY_JOB_LEVEL + " INTEGER,"
 			+ KEY_JOBNAME_ID + " INTEGER,"
-            + KEY_CREATED_AT + " DATETIME" + ")";
+            + KEY_CREATED_AT + " DATETIME" + ");";
 			
 	// Equipement table create statement
 	private static final String CREATE_TABLE_EQUIPEMENT = "CREATE TABLE "
             + TABLE_EQUIPEMENT + "(" + KEY_ID + " INTEGER PRIMARY KEY,"
 			
-            + KEY_CREATED_AT + " DATETIME" + ")";
+            + KEY_CREATED_AT + " DATETIME" + ");";
  
     public DofusMDBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -140,13 +145,15 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
         onUpgrade(db, oldVersion, newVersion);
     }
 
-    public long addPersoHandler(Personnage perso, Equipement eq) {
+    public void addPersoHandler(Personnage perso, Equipement eq) {
         SQLiteDatabase db = this.getWritableDatabase();
+
         ContentValues values = new ContentValues();
         values.put(KEY_LEVEL, perso.getLevel());
         values.put(KEY_NAME, perso.getName());
         values.put(KEY_SUCCESS , perso.getSuccess());
         values.put(KEY_KOLIZEUM , perso.getKolizeum());
+        Log.v("name", KEY_NAME);
 
         // values.put(KEY_CLASSE_ID , perso.getCla().getId());
         // values.put(KEY_ALIGNEMENT_ID + " INTEGER,");
@@ -157,21 +164,17 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
 
 
         // insert row
-        long perso_id = db.insert(TABLE_PERSO, null, values);
+        db.insert(TABLE_PERSO, null, values);
+        db.close();
 
-        // assigning tags to todo
-        for (long tag_id : tag_ids) {
-            createTodoTag(todo_id, tag_id);
-        }
-        return perso_id;
     }
 
     public boolean updatePersoHandler(Personnage perso) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues args = new ContentValues();
-        args.put(KEY_ID, perso.ID);
-        args.put(KEY_NAME, name);
-        return db.update(KEY_NAME, args, KEY_ID + "=" + ID, null) > 0;
+        args.put(KEY_ID, perso.getId());
+        args.put(KEY_NAME, perso.getName());
+        return db.update(KEY_NAME, args, KEY_ID + "=" + perso.getId(), null) > 0;
     }
 
     public boolean deletePersoHandler(int ID) {
@@ -198,6 +201,28 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
 
     }
 
+    public Personnage findPersoHandler(String perso_id) {
+        String query = "Select * FROM " + TABLE_PERSO + "WHERE" + KEY_ID + " = " + "'" + perso_id + "'";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        Personnage perso = new Personnage();
+        if (cursor.moveToFirst()) {
+            cursor.moveToFirst();
+            perso.setId(Integer.parseInt(cursor.getString(0)));
+            perso.setLevel(Integer.parseInt(cursor.getString(1)));
+            perso.setName(cursor.getString(2));
+            perso.setSuccess((Integer.parseInt(cursor.getString(1))));
+            // TOCOMPLETE //
+            cursor.close();
+        } else {
+            perso = null;
+        }
+        db.close();
+        return perso;
+    }
+
+
+    /// init
     public boolean addClasse() {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values;
@@ -232,25 +257,31 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
         return align_initialized;
     }
 
-    public Personnage findPersoHandler(String perso_id) {
-        String query = "Select * FROM " + TABLE_PERSO + "WHERE" + KEY_ID + " = " + "'" + perso_id + "'";
+    public boolean addJobName() {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
-        Personnage perso = new Personnage();
-        if (cursor.moveToFirst()) {
-            cursor.moveToFirst();
-            perso.setId(Integer.parseInt(cursor.getString(0)));
-            perso.setLevel(Integer.parseInt(cursor.getString(1)));
-            perso.setName(cursor.getString(2));
-            perso.setSuccess((Integer.parseInt(cursor.getString(1))));
-            // TOCOMPLETE //
-            cursor.close();
-        } else {
-            perso = null;
+        ContentValues values;
+        boolean jobname_initialized = false;
+        long jobname_id;
+        for (JobEnum cla : JobEnum.values()) {
+            values = new ContentValues();
+            values.put(KEY_ID, 0000);
+            values.put(KEY_JOBNAME_NAME, cla.toString());
+            values.put(KEY_CREATED_AT, getDateTime());
+            // insert row
+            jobname_id = db.insert(TABLE_JOBNAME, null, values);
+            jobname_initialized = true;
         }
-        db.close();
-        return perso;
+        return jobname_initialized;
     }
 
+
+    ////// other
+
+    private String getDateTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        Date date = new Date();
+        return dateFormat.format(date);
+    }
 
 }
