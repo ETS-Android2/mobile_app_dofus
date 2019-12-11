@@ -1,3 +1,6 @@
+package com.example.project.appclasses;
+import com.example.project.enumdofusm.ItemType;
+
 public class Item{
 
 	public static final int NBPARAM = 50;

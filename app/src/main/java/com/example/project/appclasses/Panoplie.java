@@ -1,3 +1,5 @@
+package com.example.project.appclasses;
+
 public class Panoplie{
 
 	public static final int NBPARAM = 50;

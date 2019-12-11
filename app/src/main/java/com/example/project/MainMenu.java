@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.project.ui.login.LoginActivity;
+
 public class MainMenu extends AppCompatActivity {
 
     @Override
@@ -20,4 +22,12 @@ public class MainMenu extends AppCompatActivity {
         startActivity(newsMenu);
 
     }
+
+    public void logUser(View view){
+
+        Intent loginActivity = new Intent(MainMenu.this, LoginActivity.class);
+        startActivity(loginActivity);
+
+    }
+
 }

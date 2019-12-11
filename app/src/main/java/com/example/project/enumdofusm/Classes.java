@@ -1,0 +1,7 @@
+package com.example.project.enumdofusm;
+
+public enum Classes {
+	ECAFLIP, ENIRIPSA, POI, CRA, FECA, SACRIEUR, SADIDA, OSAMODAS, ENUTROF, SRAM,
+	XELOR, PANDAWA, ROUBLARD, ZOBAL, STEAMER, ELIOTROPE, HUPPERMAGE, OUGINAK;
+	
+}
