@@ -8,6 +8,7 @@ import android.database.Cursor;
 
 import com.example.project.appclasses.Personnage;
 import com.example.project.appclasses.Equipement;
+import com.example.project.enumdofusm.Align;
 import com.example.project.enumdofusm.Classes;
 
 public class DofusMDBHandler extends SQLiteOpenHelper {
@@ -139,7 +140,7 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
         onUpgrade(db, oldVersion, newVersion);
     }
 
-    public long addPerso(Personnage perso, Equipement eq) {
+    public long addPersoHandler(Personnage perso, Equipement eq) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_LEVEL, perso.getLevel());
@@ -173,15 +174,62 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
         return db.update(KEY_NAME, args, KEY_ID + "=" + ID, null) > 0;
     }
 
-    public long addClasse(Classes cla) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(KEY_LEVEL, cla);
-        values.put(KEY_CREATED_AT, getDateTime());
-        // insert row
-        long classe_id = db.insert(TABLE_CLASSE, null, values);
+    public boolean deletePersoHandler(int ID) {
 
-        return classe_id;
+        boolean result = false;
+        String query = "Select * FROM" + TABLE_PERSO + "WHERE" + KEY_ID + "= '" + ID + "'";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        Personnage perso = new Personnage();
+
+        if (cursor.moveToFirst()) {
+            perso.setId(Integer.parseInt(cursor.getString(0)));
+            db.delete(TABLE_PERSO, KEY_ID + "=?",
+                    new String[] {
+                String.valueOf(perso.getId())
+            });
+            cursor.close();
+            result = true;
+        }
+
+        db.close();
+
+        return result;
+
+    }
+
+    public boolean addClasse() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values;
+        boolean classe_initialized = false;
+        long classe_id;
+        for (Classes cla : Classes.values()) {
+            values = new ContentValues();
+            values.put(KEY_ID, 0000);
+            values.put(KEY_CLASSE_NAME, cla.toString());
+            values.put(KEY_CREATED_AT, getDateTime());
+            // insert row
+            classe_id = db.insert(TABLE_CLASSE, null, values);
+            classe_initialized = true;
+        }
+        return classe_initialized;
+    }
+
+    public boolean addAlign() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values;
+        boolean align_initialized = false;
+        long align_id;
+        for (Align cla : Align.values()) {
+            values = new ContentValues();
+            values.put(KEY_ID, 0000);
+            values.put(KEY_ALIGNEMENT_NAME, cla.toString());
+            values.put(KEY_CREATED_AT, getDateTime());
+            // insert row
+            align_id = db.insert(TABLE_ALIGNEMENT, null, values);
+            align_initialized = true;
+        }
+        return align_initialized;
     }
 
     public Personnage findPersoHandler(String perso_id) {
@@ -201,7 +249,7 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
             perso = null;
         }
         db.close();
-        return student;
+        return perso;
     }
 
 
