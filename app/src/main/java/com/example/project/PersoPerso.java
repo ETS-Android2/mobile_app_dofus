@@ -3,6 +3,7 @@ package com.example.project;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -49,15 +50,15 @@ public class PersoPerso extends AppCompatActivity {
         EditText nomClasse = (EditText) findViewById(R.id.nomClasse);
         EditText idClasse = (EditText) findViewById(R.id.idClasse);
         TextView display_classe = (TextView) findViewById(R.id.display_classe);
-        DofusMDBHandler dbHandler = new DofusMDBHandler(this);
+       /// DofusMDBHandler dbHandler = new DofusMDBHandler(this);
         int id = 0;
         try { id = Integer.parseInt(idClasse.getText().toString().trim());}
         catch (NumberFormatException e){
         }
         Personnage p = new Personnage(); //dbHandler.findPersoHandler(Integer.toString(id));
 
-        nomClasse.setText(p.getLevel());
+        nomClasse.setText(Integer.toString(p.getLevel()));
         idClasse.setText(p.getName());
-        //display_classe.setText(p.getAl().toString());
+        display_classe.setText(p.getAl().toString());
     }
 }

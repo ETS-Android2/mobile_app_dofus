@@ -71,7 +71,7 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_PERSO = "CREATE TABLE "
             + TABLE_PERSO + "(" + KEY_ID + " INTEGER PRIMARY KEY," 
 			+ KEY_LEVEL + " INTEGER,"
-			+ KEY_NAME + "TEXT,"
+			+ KEY_NAME + " TEXT,"
 			+ KEY_SUCCESS + " INTEGER,"
 			+ KEY_KOLIZEUM + " INTEGER,"
 			+ KEY_CLASSE_ID + " INTEGER,"
