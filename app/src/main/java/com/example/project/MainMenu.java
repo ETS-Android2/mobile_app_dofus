@@ -35,4 +35,11 @@ public class MainMenu extends AppCompatActivity {
         startActivity(loginActivity);
 
     }
+
+    public void myPerso(View view){
+
+        Intent loginActivity = new Intent(MainMenu.this, MyPerso.class);
+        startActivity(loginActivity);
+
+    }
 }

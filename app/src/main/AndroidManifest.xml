@@ -11,13 +11,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PersoPerso"></activity>
+        <activity
+            android:name=".MyPerso"
+            android:label="@string/title_activity_my_perso"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".PersoPerso" />
         <activity
             android:name=".ui.login.LoginActivity"
             android:label="@string/title_activity_login" />
         <activity android:name=".loadingActivity" />
-        <activity android:name=".NewsMenu" android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".MainMenu" android:theme="@style/AppTheme.ActionBar"/>
+        <activity
+            android:name=".NewsMenu"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MainMenu"
+            android:theme="@style/AppTheme.ActionBar" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
