@@ -94,6 +94,7 @@ public class Personnage {
 	**/
 	public Personnage() {
 		this(0, 10, "Grid", Classes.CRA, 0, 0, Align.NEUTRAL, null, null, null, null, "Overgeared", "alliance", "server");
+		this.setJob(new Job());
 	}
 	
 	

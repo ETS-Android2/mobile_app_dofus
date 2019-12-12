@@ -39,8 +39,8 @@ public class PersoPerso extends AppCompatActivity {
         }
         String name = nomClasse.getText().toString();
         Personnage perso = new Personnage();  //id, name);
-        dbHandler.addPersoHandler(perso, null);
-        nomClasse.setText("");
+        long _id = dbHandler.addPersoHandler(perso);
+        nomClasse.setText(Long.toString(_id));
         idClasse.setText(error);
         display_classe.setText(name);
 
@@ -50,12 +50,12 @@ public class PersoPerso extends AppCompatActivity {
         EditText nomClasse = (EditText) findViewById(R.id.nomClasse);
         EditText idClasse = (EditText) findViewById(R.id.idClasse);
         TextView display_classe = (TextView) findViewById(R.id.display_classe);
-       /// DofusMDBHandler dbHandler = new DofusMDBHandler(this);
+        DofusMDBHandler dbHandler = new DofusMDBHandler(this);
         int id = 0;
         try { id = Integer.parseInt(idClasse.getText().toString().trim());}
         catch (NumberFormatException e){
         }
-        Personnage p = new Personnage(); //dbHandler.findPersoHandler(Integer.toString(id));
+        Personnage p = dbHandler.findPersoHandler(Integer.toString(id));
 
         nomClasse.setText(Integer.toString(p.getLevel()));
         idClasse.setText(p.getName());

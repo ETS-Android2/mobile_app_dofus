@@ -26,6 +26,11 @@ public class Job {
 		this.name = p.name;
 		this.level = p.level;
 	}
+
+	public Job(){
+		this.name = JobEnum.ALCHIMISTE;
+		this.level = 42;
+	}
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////					Getters and Setters                  ////////////////////////////

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.ContentValues;
 import android.database.Cursor;
 
+import com.example.project.appclasses.Job;
 import com.example.project.appclasses.Personnage;
 import com.example.project.appclasses.Equipement;
 import com.example.project.enumdofusm.Align;
@@ -32,7 +33,6 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
     private static final String TABLE_CLASSE = "classe";
     private static final String TABLE_ALIGNEMENT = "alignement";
 	private static final String TABLE_JOB = "job";
-	private static final String TABLE_JOBNAME = "jobname";
 	private static final String TABLE_EQUIPEMENT = "equipement";
  
     // Common column names
@@ -44,10 +44,10 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
     private static final String KEY_NAME = "name";
 	private static final String KEY_SUCCESS = "success";
     private static final String KEY_KOLIZEUM = "kolizeum";
-	
 	private static final String KEY_CLASSE_ID = "classe_id";
     private static final String KEY_ALIGNEMENT_ID = "alignement_id";
 	private static final String KEY_JOB_ID = "job_id";
+    private static final String KEY_JOB_LEVEL = "job_level";
     private static final String KEY_EQUIPEMENT_ID = "equipement_id";
  
     // CLASSE Table - column names
@@ -57,11 +57,7 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
     private static final String KEY_ALIGNEMENT_NAME = "alignement_name";
 
     // JOB Table - column names
-    private static final String KEY_JOB_LEVEL = "job_level";
-    private static final String KEY_JOBNAME_ID = "jobname_id";
-	
-	// JOBNAME Table - column names
-    private static final String KEY_JOBNAME_NAME = "jobname_name";
+    private static final String KEY_JOB_NAME = "job_name";
 	
 	// EQUIPEMENT Table - column names
     //private static final String KEY_EQUIPEMENT_ = "jobname_name";
@@ -69,7 +65,7 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
     // Table Create Statements
     // Perso table create statement
     private static final String CREATE_TABLE_PERSO = "CREATE TABLE "
-            + TABLE_PERSO + "(" + KEY_ID + " INTEGER PRIMARY KEY," 
+            + TABLE_PERSO + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
 			+ KEY_LEVEL + " INTEGER,"
 			+ KEY_NAME + " TEXT,"
 			+ KEY_SUCCESS + " INTEGER,"
@@ -77,37 +73,31 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
 			+ KEY_CLASSE_ID + " INTEGER,"
 			+ KEY_ALIGNEMENT_ID + " INTEGER,"
 			+ KEY_JOB_ID + " INTEGER,"
+            + KEY_JOB_LEVEL + " INTEGER,"
 			+ KEY_EQUIPEMENT_ID + " INTEGER,"
 			+ KEY_CREATED_AT + " DATETIME" + ");";
  
     // Classe table create statement
     private static final String CREATE_TABLE_CLASSE = "CREATE TABLE " 
-			+ TABLE_CLASSE + "(" + KEY_ID + " INTEGER PRIMARY KEY,"
+			+ TABLE_CLASSE + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
 			+ KEY_CLASSE_NAME + " TEXT,"
             + KEY_CREATED_AT + " DATETIME" + ");";
  
     // Alignement table create statement
     private static final String CREATE_TABLE_ALIGNEMENT = "CREATE TABLE "
-            + TABLE_ALIGNEMENT + "(" + KEY_ID + " INTEGER PRIMARY KEY,"
+            + TABLE_ALIGNEMENT + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
 			+ KEY_ALIGNEMENT_NAME + " TEXT,"
-            + KEY_CREATED_AT + " DATETIME" + ");";
-			
-	// JobName table create statement
-    private static final String CREATE_TABLE_JOBNAME = "CREATE TABLE "
-            + TABLE_JOBNAME + "(" + KEY_ID + " INTEGER PRIMARY KEY,"
-			+ KEY_JOBNAME_NAME + " TEXT,"
             + KEY_CREATED_AT + " DATETIME" + ");";
 	
 	// Job table create statement
 	private static final String CREATE_TABLE_JOB = "CREATE TABLE "
-            + TABLE_JOB + "(" + KEY_ID + " INTEGER PRIMARY KEY,"
-			+ KEY_JOB_LEVEL + " INTEGER,"
-			+ KEY_JOBNAME_ID + " INTEGER,"
+            + TABLE_JOB + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+			+ KEY_JOB_NAME + " TEXT,"
             + KEY_CREATED_AT + " DATETIME" + ");";
 			
 	// Equipement table create statement
 	private static final String CREATE_TABLE_EQUIPEMENT = "CREATE TABLE "
-            + TABLE_EQUIPEMENT + "(" + KEY_ID + " INTEGER PRIMARY KEY,"
+            + TABLE_EQUIPEMENT + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
 			
             + KEY_CREATED_AT + " DATETIME" + ");";
  
@@ -118,18 +108,20 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         // creating required tables
-        db.execSQL(CREATE_TABLE_JOBNAME);
         db.execSQL(CREATE_TABLE_JOB);
         db.execSQL(CREATE_TABLE_EQUIPEMENT);
 		db.execSQL(CREATE_TABLE_ALIGNEMENT);
         db.execSQL(CREATE_TABLE_CLASSE);
 		db.execSQL(CREATE_TABLE_PERSO);
+
+		addJob();
+		addAlign();
+		addClasse();
     }
  
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // on upgrade drop older tables
-		db.execSQL("DROP TABLE IF EXISTS " + TABLE_JOBNAME);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_JOB);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_EQUIPEMENT);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_ALIGNEMENT);
@@ -145,7 +137,24 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
         onUpgrade(db, oldVersion, newVersion);
     }
 
-    public void addPersoHandler(Personnage perso, Equipement eq) {
+    public int findIdHandler(SQLiteDatabase db, String TABLE_NAME, String COLUMN_NAME, String name){
+
+        String query = "Select * FROM " + TABLE_NAME + " WHERE " + COLUMN_NAME + " = " + "'" + name + "'";
+        Cursor cursor = db.rawQuery(query, null);
+        int id;
+        if (cursor.moveToFirst()) {
+            cursor.moveToFirst();
+            id = Integer.parseInt(cursor.getString(0));
+            cursor.close();
+        } else {
+            id = -1;
+        }
+        return id;
+    }
+
+    public long addPersoHandler(Personnage perso) {
+
+
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -153,34 +162,49 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
         values.put(KEY_NAME, perso.getName());
         values.put(KEY_SUCCESS , perso.getSuccess());
         values.put(KEY_KOLIZEUM , perso.getKolizeum());
-        Log.v("name", KEY_NAME);
+        values.put(KEY_CLASSE_ID , findIdHandler(db, TABLE_CLASSE, KEY_CLASSE_NAME, perso.getCla().toString()));
+        values.put(KEY_ALIGNEMENT_ID, findIdHandler(db, TABLE_ALIGNEMENT, KEY_ALIGNEMENT_NAME, perso.getCla().toString()));
+        values.put(KEY_JOB_ID, findIdHandler(db, TABLE_JOB, KEY_JOB_NAME, perso.getJob().getName().toString()));
+        values.put(KEY_JOB_LEVEL, perso.getJob().getLevel());
 
-        // values.put(KEY_CLASSE_ID , perso.getCla().getId());
-        // values.put(KEY_ALIGNEMENT_ID + " INTEGER,");
-        // values.put(KEY_JOB_ID + " INTEGER,");
-        // values.put(KEY_EQUIPEMENT_ID);
-
+        //values.put(KEY_EQUIPEMENT_ID, findIdHandler(db, TABLE_CLASSE, KEY_CLASSE_NAME, perso.getCla().toString()));
         values.put(KEY_CREATED_AT, getDateTime());
 
 
         // insert row
-        db.insert(TABLE_PERSO, null, values);
+        long _id = db.insert(TABLE_PERSO, null, values);
         db.close();
+
+        return _id;
 
     }
 
     public boolean updatePersoHandler(Personnage perso) {
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues args = new ContentValues();
-        args.put(KEY_ID, perso.getId());
-        args.put(KEY_NAME, perso.getName());
-        return db.update(KEY_NAME, args, KEY_ID + "=" + perso.getId(), null) > 0;
+        ContentValues values = new ContentValues();
+        values.put(KEY_ID, perso.getId());
+        values.put(KEY_NAME, perso.getName());
+        values.put(KEY_SUCCESS , perso.getSuccess());
+        values.put(KEY_KOLIZEUM , perso.getKolizeum());
+        values.put(KEY_CLASSE_ID , findIdHandler(db, TABLE_CLASSE, KEY_CLASSE_NAME, perso.getCla().toString()));
+        values.put(KEY_ALIGNEMENT_ID, findIdHandler(db, TABLE_ALIGNEMENT, KEY_ALIGNEMENT_NAME, perso.getCla().toString()));
+        values.put(KEY_JOB_ID, findIdHandler(db, TABLE_JOB, KEY_JOB_NAME, perso.getJob().getName().toString()));
+        values.put(KEY_JOB_LEVEL, perso.getJob().getLevel());
+
+
+        // values.put(KEY_EQUIPEMENT_ID, findIdHandler(db, TABLE_EQUIPEMENT, KEY_EQUIPEMENT_ID, perso.getCla().toString()));
+        values.put(KEY_CREATED_AT, getDateTime());
+
+        String where = KEY_ID + "=?";
+        String[] whereargs = new String[] { Integer.toString(perso.getId()) };
+
+        return db.update(KEY_NAME, values, where ,whereargs) > 0;
     }
 
     public boolean deletePersoHandler(int ID) {
 
         boolean result = false;
-        String query = "Select * FROM" + TABLE_PERSO + "WHERE" + KEY_ID + "= '" + ID + "'";
+        String query = "Select * FROM " + TABLE_PERSO + " WHERE " + KEY_ID + "= '" + ID + "'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         Personnage perso = new Personnage();
@@ -201,6 +225,21 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
 
     }
 
+    public String getAttrName(SQLiteDatabase db, String TABLE_NAME, String COLUMN_NAME, int id){
+
+        String query = "Select * FROM " + TABLE_NAME + "WHERE" + COLUMN_NAME + " = " + "'" + id + "'";
+        Cursor cursor = db.rawQuery(query, null);
+        String name;
+        if (cursor.moveToFirst()) {
+            cursor.moveToFirst();
+            name = cursor.getString(1);
+            cursor.close();
+        } else {
+            name = "";
+        }
+        return name;
+    }
+
     public Personnage findPersoHandler(String perso_id) {
         String query = "Select * FROM " + TABLE_PERSO + "WHERE" + KEY_ID + " = " + "'" + perso_id + "'";
         SQLiteDatabase db = this.getWritableDatabase();
@@ -211,7 +250,14 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
             perso.setId(Integer.parseInt(cursor.getString(0)));
             perso.setLevel(Integer.parseInt(cursor.getString(1)));
             perso.setName(cursor.getString(2));
-            perso.setSuccess((Integer.parseInt(cursor.getString(1))));
+            perso.setSuccess(Integer.parseInt(cursor.getString(3)));
+            perso.setKolizeum(Integer.parseInt(cursor.getString(4)));
+            perso.setCla(Classes.valueOf(getAttrName(db,TABLE_CLASSE, KEY_CLASSE_NAME, Integer.parseInt(cursor.getString(5)))) );
+            perso.setAl(Align.valueOf(getAttrName(db,TABLE_CLASSE, KEY_ALIGNEMENT_NAME, Integer.parseInt(cursor.getString(6)))) );
+            perso.setJob(new Job(JobEnum.valueOf(getAttrName(db,TABLE_JOB, KEY_JOB_NAME, Integer.parseInt(cursor.getString(7)))), Integer.parseInt(cursor.getString(8) )));
+
+           // values.put(KEY_EQUIPEMENT_ID, findIdHandler(db, TABLE_CLASSE, KEY_CLASSE_NAME, perso.getCla().toString()));
+
             // TOCOMPLETE //
             cursor.close();
         } else {
@@ -230,7 +276,6 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
         long classe_id;
         for (Classes cla : Classes.values()) {
             values = new ContentValues();
-            values.put(KEY_ID, 0000);
             values.put(KEY_CLASSE_NAME, cla.toString());
             values.put(KEY_CREATED_AT, getDateTime());
             // insert row
@@ -247,7 +292,6 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
         long align_id;
         for (Align cla : Align.values()) {
             values = new ContentValues();
-            values.put(KEY_ID, 0000);
             values.put(KEY_ALIGNEMENT_NAME, cla.toString());
             values.put(KEY_CREATED_AT, getDateTime());
             // insert row
@@ -257,21 +301,21 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
         return align_initialized;
     }
 
-    public boolean addJobName() {
+    public boolean addJob() {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values;
-        boolean jobname_initialized = false;
-        long jobname_id;
+        boolean job_initialized = false;
+        long job_id;
         for (JobEnum cla : JobEnum.values()) {
             values = new ContentValues();
-            values.put(KEY_ID, 0000);
-            values.put(KEY_JOBNAME_NAME, cla.toString());
+            values.put(KEY_JOB_NAME, cla.toString());
             values.put(KEY_CREATED_AT, getDateTime());
             // insert row
-            jobname_id = db.insert(TABLE_JOBNAME, null, values);
-            jobname_initialized = true;
+            job_id = db.insert(TABLE_JOB, null, values);
+            job_initialized = true;
         }
-        return jobname_initialized;
+        db.close();
+        return job_initialized;
     }
 
 
