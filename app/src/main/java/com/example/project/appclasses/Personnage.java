@@ -1,8 +1,9 @@
 package com.example.project.appclasses;
 
 import com.example.project.enumdofusm.Classes;
-import com.example.project.enumdofusm.Align;
 import com.example.project.enumdofusm.JobEnum;
+import com.example.project.enumdofusm.Servers;
+import com.example.project.enumdofusm.Sex;
 
 public class Personnage {
 
@@ -12,19 +13,15 @@ public class Personnage {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	private int id;
-	private int level;
 	private String name;
+	private int level;
+	private Sex sex;
 	private Classes cla;
 	private int success;
-	private int kolizeum;
-	private Align al;
 	private Job job;
 	private int[] carac;
-	private Item[] equipement;
-	private Personnage spouse;
-	private String guild;
-	private String alliance;
-	private String server;
+	private Servers server;
+	private String desc;
 	
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -36,23 +33,30 @@ public class Personnage {
 	*@param id the ID of the character
 	*@param
 	**/
-	public Personnage(int id, int lvl, String name, Classes cla, int success, int kolizeum, Align al, Job job, int[] carac,
-		Item[] equipement, Personnage spouse, String guild, String alliance, String server) {
+	public Personnage(int id, String name,int lvl, Sex sex, Classes cla, int success,Job job, int[] carac, Servers server, String desc) {
 		this.id = id;
 		this.level = lvl;
+		this.sex = sex;
 		this.name = name;
 		this.cla = cla;
 		this.success = success;
-		this.kolizeum = kolizeum;
-		this.al = al;
 		this.job = job;
 		this.carac = carac;
-		this.equipement = equipement;
-		this.spouse = spouse;
-		this.guild = guild;
-		this.alliance = alliance;
 		this.server = server;
+		this.desc = desc;
 		
+	}
+
+	public Personnage(String name,int lvl, Sex sex, Classes cla, int success,Job job, int[] carac, Servers server, String desc) {
+		this.level = lvl;
+		this.sex = sex;
+		this.name = name;
+		this.cla = cla;
+		this.success = success;
+		this.job = job;
+		this.carac = carac;
+		this.server = server;
+		this.desc = desc;
 	}
 	
 	/**Constructor of the class
@@ -60,22 +64,17 @@ public class Personnage {
 	*@param id the ID of the character
 	*@param
 	**/
-	public Personnage(int id, int lvl, String name, Classes cla, int success, int kolizeum, Align al, JobEnum jobn, int joblvl, int[] carac,
-		Item[] equipement, Personnage spouse, String guild, String alliance, String server) {
+	public Personnage(int id, String name,int lvl, Sex sex, Classes cla, int success, JobEnum jobn, int joblvl, int[] carac, Servers server, String desc) {
 		this.id = id;
-		this.level = lvl;
 		this.name = name;
+		this.level = lvl;
+		this.sex = sex;
 		this.cla = cla;
 		this.success = success;
-		this.kolizeum = kolizeum;
-		this.al = al;
 		this.job = new Job(jobn, joblvl);
 		this.carac = carac;
-		this.equipement = equipement;
-		this.spouse = spouse;
-		this.guild = guild;
-		this.alliance = alliance;
 		this.server = server;
+		this.desc = desc;
 		
 	}
 
@@ -84,7 +83,7 @@ public class Personnage {
 	*@param p the character to copy
 	**/
 	public Personnage(Personnage p) {
-		this(p.id, p.level, p.name, p.cla, p.success, p.kolizeum, p.al, null, p.carac, p.equipement, p.spouse, p.guild, p.alliance, p.server);
+		this(p.id, p.name, p.level, p.sex, p.cla, p.success, null, p.carac, p.server, p.desc);
 		job = new Job(p.job);
 		this.setJob(job);
 	}
@@ -93,8 +92,10 @@ public class Personnage {
 	/**Default Constructor of the class
 	**/
 	public Personnage() {
-		this(0, 10, "Grid", Classes.CRA, 0, 0, Align.NEUTRAL, null, null, null, null, "Overgeared", "alliance", "server");
+		this(0, "Grid", 10, Sex.MALE, Classes.CRA, 0, null, null, Servers.SERVER, "this is a character");
 		this.setJob(new Job());
+		int[] a = {10,10,10,10};
+		this.setCarac(a);
 	}
 	
 	
@@ -116,7 +117,20 @@ public class Personnage {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
+	/**Getter for the character's name
+	 *@return name the character's name
+	 **/
+	public String getName() {
+		return name;
+	}
+
+	/**Setter for the character's name
+	 *@param name the new character's name
+	 **/
+	public void setName(String name) {
+		this.name = name;
+	}
 	/**Getter for the character's level
 	*@return level the character's level
 	**/
@@ -130,21 +144,7 @@ public class Personnage {
 	public void setLevel(int level) {
 		this.level = level;
 	}
-	
-	/**Getter for the character's name
-	*@return name the character's name
-	**/
-	public String getName() {
-		return name;
-	}
-	
-	/**Setter for the character's name
-	*@param name the new character's name
-	**/
-	public void setName(String name) {
-		this.name = name;
-	}
-	
+
 	/**Getter for the character's class
 	*@return cla the character's class
 	**/
@@ -172,34 +172,7 @@ public class Personnage {
 	public void setSuccess(int success) {
 		this.success = success;
 	}
-	
-	/**Getter for the character's kolizeum ranking
-	*@return kolizeum the character's kolizeum ranking
-	**/
-	public int getKolizeum() {
-		return kolizeum;
-	}
-	
-	/**Setter for the character's kolizeum ranking
-	*@param kolizeum the new character's kolizeum ranking
-	**/
-	public void setKolizeum(int kolizeum) {
-		this.kolizeum = kolizeum;
-	}
-	
-	/**Getter for the character's alignment
-	*@return al the character's alignment
-	**/
-	public Align getAl() {
-		return al;
-	}
-	
-	/**Setter for the character's alignment
-	*@param al the new character's alignment
-	**/
-	public void setAl(Align al) {
-		this.al = al;
-	}
+
 	
 	/**Getter for the character's job
 	*@return job the character's job
@@ -228,45 +201,30 @@ public class Personnage {
 	public void setCarac(int[] carac) {
 		this.carac = carac;
 	}
-	
-	
-	/**Getter for the character's equipement
-	*@return equipement the character's equipement
-	**/
-	public Item[] getEquipement(){
-		return equipement;
+
+	public Sex getSex() {
+		return sex;
 	}
-	
-	/**Setter for the character's equipement
-	*@param equipement the new character's equipement
-	**/
-	public void setEquipement(Item[] equipement){
-		this.equipement = equipement;
+
+	public void setSex(Sex sex) {
+		this.sex = sex;
 	}
-	
-	/**Setter for the character's equipement
-	*@param equipement the new piece of character's equipement
-	*@param position the position of the equipement
-	**/
-	public void setEquipement(Item equipement,int position){
-		this.equipement[position] = equipement;
+
+	public Servers getServer() {
+		return server;
 	}
-	
-	/**Getter for the character's spouse
-	*@return spouse the character's spouse
-	**/
-	public Personnage getSpouse(){
-		return spouse;
+
+	public void setServer(Servers server) {
+		this.server = server;
 	}
-	
-	/**Setter for the character's spouse
-	*@param spouse the character's new spouse
-	**/
-	public void setSpouse(Personnage spouse){
-		this.spouse = spouse;
+
+	public String getDesc() {
+		return desc;
 	}
-	
-	
+
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////					Other Methods                 ///////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -276,7 +234,7 @@ public class Personnage {
 	*@return the character as a String
 	**/
 	public String toString(){
-		return(name+", "+cla+" level "+level+", has "+success+" success points and is ranked "+kolizeum+" at the kolizeum. "+al+" "+job+" "+carac+" "+equipement+" is married to {{{{"+spouse.getName()+"}}}} and is part of "+guild+" which is part of "+alliance+" in "+server+"\n");	
+		return(name+", "+cla+" level "+level+", has "+success+" success points and is ranked "+job+" "+carac+" in "+server+"\n");
 	}
 	
 	// public Personne clone() throws CloneNotSupportedException { 
