@@ -262,7 +262,6 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "Select "+ KEY_NAME+", "+ KEY_LEVEL +", "+ KEY_CLASSE_NAME + " FROM " + TABLE_PERSO +" a INNER JOIN " +TABLE_CLASSE +" b ON a."+ KEY_CLASSE_ID+" = b."+KEY_ID;
         Cursor cursor = db.rawQuery(query, null);
-        Log.v("u", query);
         List<String> u = new ArrayList<String>();
         for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
             u.add(cursor.getString(cursor.getColumnIndex(KEY_NAME))+"   -   NIVEAU "+cursor.getString(cursor.getColumnIndex(KEY_LEVEL))+"    -    CLASSE : "+cursor.getString(cursor.getColumnIndex(KEY_CLASSE_NAME)));
@@ -270,6 +269,34 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
         cursor.close();
         return u;
     }
+
+
+
+    public List<String> getSexHandler(){
+        return getListAttrHandler(KEY_SEX_NAME, TABLE_SEX);
+    }
+
+    public List<String> getClassHandler(){
+        return getListAttrHandler(KEY_CLASSE_NAME, TABLE_CLASSE);
+    }
+
+    public List<String> getServHandler(){
+        return getListAttrHandler(KEY_SERVER_NAME, TABLE_SERVER);
+    }
+
+    public List<String> getListAttrHandler(String attr, String table){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "Select "+ attr+ " FROM " + table;
+        Cursor cursor = db.rawQuery(query, null);
+        List<String> u = new ArrayList<String>();
+        for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+            u.add(cursor.getString(cursor.getColumnIndex(attr)));
+        }
+        cursor.close();
+        db.close();
+        return u;
+    }
+
 
     public boolean deletePersoHandler(int ID) {
         boolean result = false;
