@@ -250,7 +250,7 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, perso.getName());
         values.put(KEY_LEVEL, perso.getLevel());
-        values.put(KEY_SEX_ID, perso.getSex().toString());
+        values.put(KEY_SEX_ID,     findIdHandler(db, TABLE_SEX, KEY_SEX_NAME, perso.getSex().toString()));
         values.put(KEY_CLASSE_ID , findIdHandler(db, TABLE_CLASSE, KEY_CLASSE_NAME, perso.getCla().toString()));
         values.put(KEY_SUCCESS , perso.getSuccess());
         values.put(KEY_CARAC_ID, carid);
@@ -423,7 +423,7 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
         List<Job> jo = new ArrayList<Job>();
 
         Log.v(LOG, query);
-        
+
 
         // todo
         for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
@@ -447,7 +447,7 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
             perso.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID))));
             perso.setName(cursor.getString(cursor.getColumnIndex(KEY_NAME)));
             perso.setLevel(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_LEVEL))));
-            perso.setSex( Sex.valueOf(  getAttrName(db,TABLE_SEX, KEY_ID, Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_SEX_ID)))).trim() ));
+            perso.setSex( Sex.valueOf( getAttrName(   db,TABLE_SEX, KEY_ID,    Integer.parseInt(           cursor.getString(cursor.getColumnIndex(KEY_SEX_ID)))).trim() ));
             perso.setCla( Classes.valueOf(  getAttrName(db,TABLE_CLASSE, KEY_ID, Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_CLASSE_ID)))).trim()   ) );
             perso.setSuccess(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_SUCCESS))));
             perso.setJob(retrieveJobs(db,perso.getId()));

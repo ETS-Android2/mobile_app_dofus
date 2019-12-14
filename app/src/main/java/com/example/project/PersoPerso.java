@@ -85,7 +85,7 @@ public class PersoPerso extends AppCompatActivity {
         catch (NumberFormatException e){
         }
         Personnage p = dbHandler.findPersoHandler(Integer.toString(id));
-        c1.setText(p.getName());
+        //c1.setText(p.getName());
         c8.setText(p.getDesc());
     }
 
