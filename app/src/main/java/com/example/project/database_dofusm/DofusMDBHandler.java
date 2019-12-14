@@ -155,8 +155,7 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
 
     // Job_Perso table create statement
     private static final String CREATE_TABLE_JOB_PERSO = "CREATE TABLE "
-            + TABLE_JOB_PERSO + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-            + KEY_JOB_ID + " INTEGER,"
+            + TABLE_JOB_PERSO + "(" + KEY_JOB_ID + " INTEGER,"
             + KEY_PERSO_ID + " INTEGER,"
             + KEY_CREATED_AT + " DATETIME" + ");";
 
@@ -343,20 +342,45 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
 
     public boolean deletePersoHandler(int ID) {
         boolean result = false;
-        String query = "Select * FROM " + TABLE_PERSO + " WHERE " + KEY_ID + "= '" + ID + "'";
         SQLiteDatabase db = this.getWritableDatabase();
+        int a;
+
+
+        String query = "Select "+ KEY_JOB_ID +" FROM " + TABLE_JOB_PERSO + " WHERE " + KEY_PERSO_ID + "= '" + ID + "'";
         Cursor cursor = db.rawQuery(query, null);
+        for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+            a = Integer.parseInt(cursor.getString(0));
+            db.delete(TABLE_JOB, KEY_ID + "=?",
+                    new String[] {
+                            String.valueOf(a)
+                    });
+        }
+        cursor.close();
+
+        query = "Select "+ KEY_CARAC_ID +" FROM " + TABLE_PERSO + " WHERE " + KEY_PERSO_ID + "= '" + ID + "'";
+        cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()){
+            a = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_CARAC_ID)));
+            db.delete(TABLE_CARAC, KEY_ID + "=?",
+                    new String[] {
+                            String.valueOf(a)
+                    });
+        }
+        cursor.close();
+
+        query = "Select * FROM " + TABLE_PERSO + " WHERE " + KEY_ID + "= '" + ID + "'";
+        cursor = db.rawQuery(query, null);
         Personnage perso = new Personnage();
         if (cursor.moveToFirst()) {
-            perso.setId(Integer.parseInt(cursor.getString(0)));
+            Integer.parseInt(cursor.getString(0));
             db.delete(TABLE_PERSO, KEY_ID + "=?",
                     new String[] {
-                String.valueOf(perso.getId())
-            });
+                            String.valueOf(perso.getId())
+                    });
             cursor.close();
             result = true;
         }
-        // Todo delete job
+
         db.close();
 
         return result;
@@ -390,6 +414,27 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
         return car;
     }
 
+    public Job[] retrieveJobs(SQLiteDatabase db, int id){
+
+
+
+        String query = "Select "+ KEY_JOB_LEVEL +", "+ KEY_JOBNAME_NAME +" FROM ( " + TABLE_JOB_PERSO + " a INNER JOIN "+TABLE_JOB+" b ON a." +KEY_JOB_ID+ " = b."+KEY_ID+" ) C INNER JOIN "+TABLE_JOBNAME+" d ON c." + KEY_JOBNAME_ID + " = d."+KEY_ID+" WHERE " + KEY_PERSO_ID + "= '" + id + "'";
+        Cursor cursor = db.rawQuery(query, null);
+        List<Job> jo = new ArrayList<Job>();
+
+        Log.v(LOG, query);
+        
+
+        // todo
+        for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+            jo.add(new Job( JobEnum.valueOf(  cursor.getString(cursor.getColumnIndex(KEY_JOBNAME_NAME)) ), Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_JOB_LEVEL)))));
+        }
+        cursor.close();
+        Job[] a = new Job[jo.size()];
+        a = jo.toArray(a);
+        return a;
+    }
+
     public Personnage findPersoHandler(String perso_id) {
         String query = "Select * FROM " + TABLE_PERSO + " WHERE " + KEY_ID + " = " + "'" + perso_id + "'";
 
@@ -405,17 +450,11 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
             perso.setSex( Sex.valueOf(  getAttrName(db,TABLE_SEX, KEY_ID, Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_SEX_ID)))).trim() ));
             perso.setCla( Classes.valueOf(  getAttrName(db,TABLE_CLASSE, KEY_ID, Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_CLASSE_ID)))).trim()   ) );
             perso.setSuccess(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_SUCCESS))));
-
-
-            //perso.setJob(new Job(JobEnum.valueOf(getAttrName(db,TABLE_JOB, KEY_ID, Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_JOB_ID))))), Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_JOB_LEVEL)) )));
-
+            perso.setJob(retrieveJobs(db,perso.getId()));
             perso.setCarac(retrievecarac(db,Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_CARAC_ID)) )));
-
             perso.setServer( Servers.valueOf(  getAttrName(db,TABLE_SERVER, KEY_ID, Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_SERVER_ID)))).trim()   ) );
             perso.setDesc(cursor.getString(cursor.getColumnIndex(KEY_DESC)));
 
-
-            // TODO //
             cursor.close();
         } else {
             perso = null;
