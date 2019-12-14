@@ -6,143 +6,103 @@
     android:layout_height="match_parent"
     tools:context=".PersoPerso">
 
-    <Button
-        android:id="@+id/buttonEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="findPerso"
-        android:text="Edit"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/SavePerso"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pers8" />
-
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="drop"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/SavePerso"
-        app:layout_constraintTop_toBottomOf="@+id/pers8" />
-
-    <Button
-        android:id="@+id/button9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="delPerso"
-        android:text="delete"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonEdit" />
-
-    <Button
-        android:id="@+id/SavePerso"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="addPerso"
-        android:text="SavePerso"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pers8" />
-
-    <EditText
-        android:id="@+id/pers1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/pers2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
-
-    <EditText
-        android:id="@+id/pers2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="11dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/spinner"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/pers5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/pers6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/pers6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/pers7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/pers7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintBottom_toTopOf="@+id/pers8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/pers8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="210dp"
-        android:layout_height="29dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="127dp" />
-
-    <Spinner
-        android:id="@+id/spinner2"
-        android:layout_width="209dp"
-        android:layout_height="25dp"
-        app:layout_constraintBottom_toTopOf="@+id/pers5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
-
     <ScrollView
-        android:layout_width="71dp"
-        android:layout_height="457dp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="1dp">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/pers1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                tools:visibility="visible" />
+
+            <EditText
+                android:id="@+id/pers2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="11dp"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="210dp"
+                android:layout_height="29dp" />
+
+            <Spinner
+                android:id="@+id/spinner2"
+                android:layout_width="209dp"
+                android:layout_height="25dp" />
+
+            <EditText
+                android:id="@+id/pers5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/pers6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/pers7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Name" />
+
+            <EditText
+                android:id="@+id/pers8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Name" />
+
+            <Button
+                android:id="@+id/button9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="delPerso"
+                android:text="delete" />
+
+            <Button
+                android:id="@+id/buttonEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="findPerso"
+                android:text="Edit" />
+
+            <Button
+                android:id="@+id/SavePerso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="addPerso"
+                android:text="SavePerso" />
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="drop"
+                android:text="Button" />
+        </LinearLayout>
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

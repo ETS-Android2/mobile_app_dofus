@@ -9,9 +9,11 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.example.project.appclasses.Job;
 import com.example.project.appclasses.Personnage;
 import com.example.project.database_dofusm.DofusMDBHandler;
 import com.example.project.enumdofusm.Classes;
+import com.example.project.enumdofusm.JobEnum;
 import com.example.project.enumdofusm.Servers;
 import com.example.project.enumdofusm.Sex;
 
@@ -72,13 +74,14 @@ public class CreatePerso extends AppCompatActivity {
         Classes cla = Classes.valueOf(s2.getSelectedItem().toString());
         int suc = Integer.parseInt(et3.getText().toString());
 
-        //Job jo = new Job(JobEnum.valueOf(job.getText().toString()), 0);
-
+        //Job joo = new Job(JobEnum.valueOf(job.getText().toString()), 0);
+        Job joo = new Job(JobEnum.ALCHIMISTE, 0);
+        Job[] jo = {joo};
         int[] car = {Integer.parseInt(et4.getText().toString()), Integer.parseInt(et5.getText().toString()), Integer.parseInt(et6.getText().toString()), Integer.parseInt(et7.getText().toString())};
         Servers serv = Servers.valueOf(s3.getSelectedItem().toString());
         String descr = tiett.getText().toString();
 
-        Personnage perso = new Personnage(); //name,level, sex, cla, suc, jo, car, serv, desc);
+        Personnage perso = new Personnage(name,level, sex, cla, suc, jo, car, serv, descr);
         long _id = dbHandler.addPersoHandler(perso);
     }
 

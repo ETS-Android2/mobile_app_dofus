@@ -24,4 +24,14 @@
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_my_perso">MyPerso</string>
 
+    <!--Create perso-->
+    <string name="cname">Nom</string>
+    <string name="clvl">Niveau</string>
+    <string name="carstr">STR</string>
+    <string name="caragi">AGI</string>
+    <string name="carluk">LUK</string>
+    <string name="carint">INT</string>
+    <string name="descr">DESCRIPTION</string>
+
+
 </resources>

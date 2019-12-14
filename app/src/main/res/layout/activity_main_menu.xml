@@ -37,7 +37,7 @@
         android:id="@+id/button3"
         android:layout_width="150dp"
         android:layout_height="52dp"
-        android:onClick="Testview"
+        android:onClick="CreatePerso"
         android:text="@string/main_menu_button1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

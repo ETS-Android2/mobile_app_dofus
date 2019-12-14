@@ -418,7 +418,7 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
 
 
 
-        String query = "Select "+ KEY_JOB_LEVEL +", "+ KEY_JOBNAME_NAME +" FROM ( " + TABLE_JOB_PERSO + " a INNER JOIN "+TABLE_JOB+" b ON a." +KEY_JOB_ID+ " = b."+KEY_ID+" ) C INNER JOIN "+TABLE_JOBNAME+" d ON c." + KEY_JOBNAME_ID + " = d."+KEY_ID+" WHERE " + KEY_PERSO_ID + "= '" + id + "'";
+        String query = "Select "+ KEY_JOB_LEVEL +", "+ KEY_JOBNAME_NAME +" FROM ( " + TABLE_JOB_PERSO + " a INNER JOIN "+TABLE_JOB+" b ON a." +KEY_JOB_ID+ " = b."+KEY_ID+" ) c INNER JOIN "+TABLE_JOBNAME+" d ON c." + KEY_JOBNAME_ID + " = d."+KEY_ID+" WHERE " + KEY_PERSO_ID + "= '" + id + "'";
         Cursor cursor = db.rawQuery(query, null);
         List<Job> jo = new ArrayList<Job>();
 
@@ -432,6 +432,7 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
         cursor.close();
         Job[] a = new Job[jo.size()];
         a = jo.toArray(a);
+        Log.v(LOG, a.toString());
         return a;
     }
 
