@@ -51,17 +51,17 @@ public class CreatePerso extends AppCompatActivity {
 
         Log.v("truc", findSex().toString());
 
-//        List<String> sex = findSex();
-//        ArrayAdapter<String> adaptersex = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, sex);
-//        s1.setAdapter(adaptersex);
-//
-//        List<String> classes = findClasse();
-//        ArrayAdapter<String> adapterclass = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, classes);
-//        s2.setAdapter(adapterclass);
-//
-//        List<String> servs = findServer();
-//        ArrayAdapter<String> adapterserv = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, servs);
-//        s3.setAdapter(adapterserv);
+        List<String> sex = findSex();
+        ArrayAdapter<String> adaptersex = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, sex);
+        s1.setAdapter(adaptersex);
+
+        List<String> classes = findClasse();
+        ArrayAdapter<String> adapterclass = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, classes);
+        s2.setAdapter(adapterclass);
+
+        List<String> servs = findServer();
+        ArrayAdapter<String> adapterserv = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, servs);
+        s3.setAdapter(adapterserv);
 
     }
 

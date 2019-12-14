@@ -5,6 +5,9 @@ import com.example.project.enumdofusm.JobEnum;
 import com.example.project.enumdofusm.Servers;
 import com.example.project.enumdofusm.Sex;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Personnage {
 
 	
@@ -18,7 +21,7 @@ public class Personnage {
 	private Sex sex;
 	private Classes cla;
 	private int success;
-	private Job job;
+	private Job[] job;
 	private int[] carac;
 	private Servers server;
 	private String desc;
@@ -33,7 +36,7 @@ public class Personnage {
 	*@param id the ID of the character
 	*@param
 	**/
-	public Personnage(int id, String name,int lvl, Sex sex, Classes cla, int success,Job job, int[] carac, Servers server, String desc) {
+	public Personnage(int id, String name,int lvl, Sex sex, Classes cla, int success,Job[] job, int[] carac, Servers server, String desc) {
 		this.id = id;
 		this.level = lvl;
 		this.sex = sex;
@@ -47,7 +50,7 @@ public class Personnage {
 		
 	}
 
-	public Personnage(String name,int lvl, Sex sex, Classes cla, int success,Job job, int[] carac, Servers server, String desc) {
+	public Personnage(String name,int lvl, Sex sex, Classes cla, int success,Job[] job, int[] carac, Servers server, String desc) {
 		this.level = lvl;
 		this.sex = sex;
 		this.name = name;
@@ -58,25 +61,8 @@ public class Personnage {
 		this.server = server;
 		this.desc = desc;
 	}
-	
-	/**Constructor of the class
-	*@param lvl the level of the character
-	*@param id the ID of the character
-	*@param
-	**/
-	public Personnage(int id, String name,int lvl, Sex sex, Classes cla, int success, JobEnum jobn, int joblvl, int[] carac, Servers server, String desc) {
-		this.id = id;
-		this.name = name;
-		this.level = lvl;
-		this.sex = sex;
-		this.cla = cla;
-		this.success = success;
-		this.job = new Job(jobn, joblvl);
-		this.carac = carac;
-		this.server = server;
-		this.desc = desc;
-		
-	}
+
+
 
 
 	/**Copy Constructor of the class
@@ -84,8 +70,13 @@ public class Personnage {
 	**/
 	public Personnage(Personnage p) {
 		this(p.id, p.name, p.level, p.sex, p.cla, p.success, null, p.carac, p.server, p.desc);
-		job = new Job(p.job);
-		this.setJob(job);
+		List<Job> jo = new ArrayList<Job>();
+		for (Job j : p.getJob()){
+		    jo.add(new Job(j.getName(), j.getLevel()));
+        }
+        Job[] a = new Job[jo.size()];
+        a = jo.toArray(a);
+		this.setJob(a);
 	}
 
 
@@ -93,9 +84,10 @@ public class Personnage {
 	**/
 	public Personnage() {
 		this(0, "Grid", 10, Sex.MALE, Classes.CRA, 0, null, null, Servers.SERVER, "this is a character");
-		this.setJob(new Job());
-		int[] a = {10,10,10,10};
-		this.setCarac(a);
+		Job[] a = {new Job()};
+		this.setJob(a);
+		int[] b = {10,10,10,10};
+		this.setCarac(b);
 	}
 	
 	
@@ -177,14 +169,14 @@ public class Personnage {
 	/**Getter for the character's job
 	*@return job the character's job
 	**/
-	public Job getJob() {
+	public Job[] getJob() {
 		return job;
 	}
 	
 	/**Setter for the character's job
 	*@param job the new character's job
 	**/
-	public void setJob(Job job) {
+	public void setJob(Job[] job) {
 		this.job = job;
 	}
 	
