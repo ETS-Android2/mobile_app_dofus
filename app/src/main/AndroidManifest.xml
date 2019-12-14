@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CreatePerso"></activity>
+        <activity android:name=".Display_Perso"></activity>
+        <activity android:name=".CreatePerso" />
         <activity
             android:name=".MyPerso"
             android:label="@string/title_activity_my_perso"

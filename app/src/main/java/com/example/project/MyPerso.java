@@ -1,5 +1,6 @@
 package com.example.project;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.project.appclasses.Personnage;
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -22,13 +24,13 @@ public class MyPerso extends AppCompatActivity {
 
     private ListView mListView;
     private List<String> personnages;
+    Intent myIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_perso);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        myIntent = new Intent(this, Display_Perso.class);
 
         mListView = (ListView) findViewById(R.id.listview2);
 
@@ -38,6 +40,17 @@ public class MyPerso extends AppCompatActivity {
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(MyPerso.this,
                 android.R.layout.simple_list_item_1, personnages);
         mListView.setAdapter(adapter);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String h = (String) parent.getItemAtPosition(position);
+                String s2 = h.substring(0, h.indexOf("."));
+                // todo get the id from the String and either open a fragment or a new activity displaying the character
+                myIntent.putExtra("id_perso", s2);
+                startActivity(myIntent);
+
+            }
+        });
 
     }
 

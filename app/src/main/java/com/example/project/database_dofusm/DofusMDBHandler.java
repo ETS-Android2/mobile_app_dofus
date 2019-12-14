@@ -305,11 +305,11 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
 
     public List<String> getPersName(){
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "Select "+ KEY_NAME+", "+ KEY_LEVEL +", "+ KEY_CLASSE_NAME + " FROM " + TABLE_PERSO +" a INNER JOIN " +TABLE_CLASSE +" b ON a."+ KEY_CLASSE_ID+" = b."+KEY_ID;
+        String query = "Select a."+KEY_ID + ", " + KEY_NAME+", "+ KEY_LEVEL +", "+ KEY_CLASSE_NAME + " FROM " + TABLE_PERSO +" a INNER JOIN " +TABLE_CLASSE +" b ON a."+ KEY_CLASSE_ID+" = b."+KEY_ID;
         Cursor cursor = db.rawQuery(query, null);
         List<String> u = new ArrayList<String>();
         for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-            u.add(cursor.getString(cursor.getColumnIndex(KEY_NAME))+"   -   NIVEAU "+cursor.getString(cursor.getColumnIndex(KEY_LEVEL))+"    -    CLASSE : "+cursor.getString(cursor.getColumnIndex(KEY_CLASSE_NAME)));
+            u.add(cursor.getString(cursor.getColumnIndex(KEY_ID))+"." +cursor.getString(cursor.getColumnIndex(KEY_NAME))+"   -   NIVEAU "+cursor.getString(cursor.getColumnIndex(KEY_LEVEL))+"    -    CLASSE : "+cursor.getString(cursor.getColumnIndex(KEY_CLASSE_NAME)));
         }
         cursor.close();
         return u;

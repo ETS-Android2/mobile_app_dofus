@@ -32,6 +32,9 @@
     <string name="carluk">LUK</string>
     <string name="carint">INT</string>
     <string name="descr">DESCRIPTION</string>
+    <string name="succ">SUCCES</string>
+    <string name="create_perso">CREATION D\'UN PERSONNAGE</string>
+    <string name="save">Enregistrer</string>
 
 
 </resources>

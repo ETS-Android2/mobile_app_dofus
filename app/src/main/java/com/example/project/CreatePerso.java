@@ -1,6 +1,7 @@
 package com.example.project;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.project.appclasses.Job;
 import com.example.project.appclasses.Personnage;
@@ -32,12 +34,15 @@ public class CreatePerso extends AppCompatActivity {
     private EditText et7;
     private Spinner s3;
     private EditText tiett;
+    private TextView confirm;
     private DofusMDBHandler dbHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_perso);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         et1 = (EditText) findViewById(R.id.editText);
         et2 = (EditText) findViewById(R.id.editText2);
         s1 = (Spinner) findViewById(R.id.spinner3);
@@ -49,6 +54,7 @@ public class CreatePerso extends AppCompatActivity {
         et7 = (EditText) findViewById(R.id.editText7);
         s3 = (Spinner) findViewById(R.id.spinner5);
         tiett = (EditText) findViewById(R.id.tiet);
+        confirm = (TextView) findViewById(R.id.textView2);
         dbHandler = new DofusMDBHandler(this);
 
         Log.v("truc", findSex().toString());
@@ -83,6 +89,15 @@ public class CreatePerso extends AppCompatActivity {
 
         Personnage perso = new Personnage(name,level, sex, cla, suc, jo, car, serv, descr);
         long _id = dbHandler.addPersoHandler(perso);
+        et1.setText("");
+        et2.setText("");
+        et3.setText("");
+        et4.setText("");
+        et5.setText("");
+        et6.setText("");
+        et7.setText("");
+        tiett.setText("");
+        confirm.setText("enregistrement effectué");
     }
 
     public List<String> findSex(){;
