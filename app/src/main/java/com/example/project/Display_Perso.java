@@ -53,6 +53,7 @@ public class Display_Perso extends AppCompatActivity {
         dis = (TextView) findViewById(R.id.textView5);
         dis.setText(showPerso(Integer.parseInt(_id)));
         initialize_layout();
+
     }
 
     public String showPerso(int id){
@@ -63,6 +64,7 @@ public class Display_Perso extends AppCompatActivity {
     }
 
     public void delPerso(View view){
+
         int why = Integer.parseInt(_id);
         boolean succ = dbHandler.deletePersoHandler(why);
         Intent myIntent = new Intent(this, MyPerso.class);

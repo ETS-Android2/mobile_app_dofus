@@ -26,5 +26,18 @@
     <string name="load">The application is preparing itself...</string>
     <string name="night_mode">Night mode</string>
     <string name="share">Share</string>
+    <string name="delete">Delete</string>
+    <string name="obj_content">Objective</string>
+    <string name="obj_title">Title</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="refresh">Refresh</string>
+    <string name="save">Save</string>
+    <string name="succ">Success</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="title_activity_my_perso">MyPerso</string>
+    <string name="view_obj">See my current Objectives</string>
+    <string name="set_objective">Set an objective</string>
+    <string name="Set_date">Set a date</string>
 
 </resources>

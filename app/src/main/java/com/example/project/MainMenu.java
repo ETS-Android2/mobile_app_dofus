@@ -60,8 +60,6 @@ public class MainMenu extends AppCompatActivity {
         }
 
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         ImageView imageView1 = (ImageView) findViewById(R.id.imageView1);
         m = MediaPlayer.create(MainMenu.this, R.raw.m);
         imageView1.setOnTouchListener(touchListenerImg);

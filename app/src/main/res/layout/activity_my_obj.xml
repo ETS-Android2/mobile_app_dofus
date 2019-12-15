@@ -27,7 +27,7 @@
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="@string/set_objective" />
 
             <EditText
                 android:id="@+id/editText12"
@@ -53,6 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:hint="@string/Set_date"
                 android:inputType="date" />
 
             <Button

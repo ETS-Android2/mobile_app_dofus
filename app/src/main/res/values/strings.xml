@@ -11,7 +11,7 @@
 
     <!-- News Menu -->
     <string name="news_menu_headtitle">News</string>
-    <string name="refresh">Actualiser</string>
+    <string name="refresh">Refresh</string>
     <string name="title_activity_login">Sign in</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -31,15 +31,15 @@
     <string name="carluk">Luck</string>
     <string name="carint">Intelligence</string>
     <string name="descr">Description</string>
-    <string name="succ">SUCCES</string>
+    <string name="succ">Success</string>
     <string name="create_perso">Create a character</string>
-    <string name="save">Enregistrer</string>
+    <string name="save">Save</string>
     <string name="jlvl">LVL</string>
     <string name="objectives">My objectives</string>
 
 
     <!-- Display perso -->
-    <string name="share">share</string>
+    <string name="share">Share</string>
     <string name="edit">Edit</string>
     <string name="wait">Please wait</string>
     <string name="load">The application is preparing itself...</string>
@@ -49,6 +49,8 @@
     <string name="view_obj">See my current Objectives</string>
     <string name="obj_title">Title</string>
     <string name="obj_content">Objective</string>
-    <string name="delete">delete</string>
+    <string name="delete">Delete</string>
+    <string name="set_objective">Set an objective</string>
+    <string name="Set_date">Set a date</string>
 
 </resources>
