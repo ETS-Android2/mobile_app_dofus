@@ -234,20 +234,19 @@ public class Personnage implements Serializable {
 	**/
 	@Override
 	public String toString() {
-		String s ="Personnage{" +
-				"id=" + id +
-				", name='" + name + '\'' +
-				", level=" + level +
-				", sex=" + sex +
-				", cla=" + cla +
-				", success=" + success;
+		String s =" Personnage\n" +
+				" id=" + id +
+				"\n Nom = " + name +
+				"\n Niveau = " + level +
+				"\n Sexe - " + sex +
+				"\n Classe - " + cla +
+				"\n Pts de succès =" + success;
 		for (Job j : getJob()){
 			s+= j.getName().toString()+" "+j.getLevel();
 		}
-		s+="STR = " + getCarac()[0]+"\n, AGI = "+getCarac()[1]+"\n, Luck = "+getCarac()[1]+"\n, Agility = "+getCarac()[1]+"\n";
-		s+=", server=" + server +
-				", desc='" + desc + '\'' +
-				'}';
+		s+="\nForce = " + getCarac()[0]+", Agilité = "+getCarac()[1]+", Change = "+getCarac()[2]+"\n, Intelligence = "+getCarac()[3]+"\n";
+		s+="Serveur " + server +
+				"Description ='" + desc + '\'';
 
 		return s;
 	}
