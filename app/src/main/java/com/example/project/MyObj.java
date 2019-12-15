@@ -38,7 +38,9 @@ public class MyObj extends AppCompatActivity {
         String content = contob.getText().toString();
         String date = datob.getText().toString();
         dbHandler.addObjHandler(new Objectives(title, content, date, 0));
-
+        titob.setText("");
+        contob.setText("");
+        datob.setText("");
 
     }
 
