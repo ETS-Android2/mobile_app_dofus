@@ -6,6 +6,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -31,6 +32,7 @@ public class Display_Perso extends AppCompatActivity {
         _id = inte.getStringExtra("id_perso");
         dis = (TextView) findViewById(R.id.textView5);
         dis.setText(showPerso(Integer.parseInt(_id)));
+        Log.v("ffffffffffffffffffffffff iiiiiiiiiiiiiiiiiiiiiiiiiii ddddddddddddddddddd",_id);
     }
 
     public String showPerso(int id){
@@ -42,7 +44,10 @@ public class Display_Perso extends AppCompatActivity {
     }
 
     public void delPerso(View view){
-        dbHandler.deletePersoHandler(Integer.parseInt(_id));
+        Log.v("ffffffffffffffffffffffff iiiiiiiiiiiiiiiiiiiiiiiiiii ddddddddddddddddddd",_id);
+        int why = Integer.parseInt(_id);
+        Log.v("ffffffffffffffffffffffff iiiiiiiiiiiiiiiiiiiiiiiiiii ddddddddddddddddddd",""+why);
+        dbHandler.deletePersoHandler(why);
         Intent myIntent = new Intent(this, MyPerso.class);
         startActivity(myIntent);
     }
