@@ -27,7 +27,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="24dp"
         android:onClick="CreatePerso"
-        android:text="@string/main_menu_button1"
+        android:text="@string/create_perso"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,8 +70,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="238dp"
+        android:layout_height="226dp"
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
