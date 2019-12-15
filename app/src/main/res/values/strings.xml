@@ -5,13 +5,12 @@
     <string name="test_string">DofuMaker</string>
 
     <!-- Main Menu -->
-    <string name="main_menu_button1">Créer un personnage</string>
-    <string name="main_menu_button2">Mes personnages</string>
-    <string name="main_menu_button3">Les actualités du jeu</string>
-    <string name="main_menu_button4">Login</string>
+    <string name="main_menu_button2">My characters</string>
+    <string name="main_menu_button3">News</string>
+    <string name="main_menu_button4">Log-in</string>
 
     <!-- News Menu -->
-    <string name="news_menu_headtitle">Les actualités du jeu</string>
+    <string name="news_menu_headtitle">News</string>
     <string name="refresh">Actualiser</string>
     <string name="title_activity_login">Sign in</string>
     <string name="prompt_email">Email</string>
@@ -31,9 +30,9 @@
     <string name="caragi">AGI</string>
     <string name="carluk">Luck</string>
     <string name="carint">Intelligence</string>
-    <string name="descr">DESCRIPTION</string>
+    <string name="descr">Description</string>
     <string name="succ">SUCCES</string>
-    <string name="create_perso">CREATION D\'UN PERSONNAGE</string>
+    <string name="create_perso">Create a character</string>
     <string name="save">Enregistrer</string>
     <string name="jlvl">LVL</string>
     <string name="objectives">My objectives</string>
@@ -41,6 +40,6 @@
 
     <!-- Display perso -->
     <string name="share">share</string>
-    <string name="edit">edit</string>
+    <string name="edit">Edit</string>
 
 </resources>

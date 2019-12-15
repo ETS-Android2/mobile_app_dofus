@@ -27,7 +27,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="24dp"
         android:onClick="CreatePerso"
-        android:text="@string/main_menu_button1"
+        android:text="@string/create_perso"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"

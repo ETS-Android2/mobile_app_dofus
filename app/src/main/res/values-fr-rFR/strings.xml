@@ -11,4 +11,15 @@
     <string name="clvl">Level</string>
     <string name="cname">Nom</string>
     <string name="objectives">Mes objectifs</string>
+    <string name="create_perso">Créer un personnage</string>
+    <string name="descr">Description</string>
+    <string name="edit">Modifier</string>
+    <string name="invalid_password">> 5 caractères requis</string>
+    <string name="invalid_username">Pseudonyme non valide</string>
+    <string name="jlvl">NIV</string>
+    <string name="login_failed">La connexion a échoué</string>
+    <string name="main_menu_button2">Mes personnages</string>
+    <string name="main_menu_button3">Actualités du jeu</string>
+    <string name="main_menu_button4">Se connecter</string>
+    <string name="news_menu_headtitle">Actualités du jeu</string>
 </resources>
