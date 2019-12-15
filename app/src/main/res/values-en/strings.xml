@@ -10,4 +10,5 @@
     <string name="carstr">Strength</string>
     <string name="clvl">Niveau</string>
     <string name="cname">Name</string>
+    <string name="objectives">My objectives</string>
 </resources>
