@@ -29,7 +29,7 @@ public class DisplayObj extends AppCompatActivity {
 
         // Objectif o = dbHandler.findObjHandler(Integer.toString(id));
         String o = "";
-        
+
 
         refreshScreen();
         String obj = o.toString();

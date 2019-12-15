@@ -16,7 +16,8 @@ public class Personnage implements Serializable {
 	//////////////////				Attributes		                 ////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	static final long serialVersionUID = 1;
+	static final long serialVersionUID = 123456789123456789L;
+
 	private int id;
 	private String name;
 	private int level;
