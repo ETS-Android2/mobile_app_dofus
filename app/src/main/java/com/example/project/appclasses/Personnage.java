@@ -7,6 +7,7 @@ import com.example.project.enumdofusm.Sex;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Personnage implements Serializable {
@@ -231,11 +232,26 @@ public class Personnage implements Serializable {
 	/**toString for the character
 	*@return the character as a String
 	**/
-	public String toString(){
-		return(name+", "+cla+" level "+level+", has "+success+" success points and is ranked "+job+" "+carac+" in "+server+"\n");
+	@Override
+	public String toString() {
+		String s ="Personnage{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", level=" + level +
+				", sex=" + sex +
+				", cla=" + cla +
+				", success=" + success;
+		for (Job j : getJob()){
+			s+= j.getName().toString()+" "+j.getLevel();
+		}
+		s+="STR = " + getCarac()[0]+"\n, AGI = "+getCarac()[1]+"\n, Luck = "+getCarac()[1]+"\n, Agility = "+getCarac()[1]+"\n";
+		s+=", server=" + server +
+				", desc='" + desc + '\'' +
+				'}';
+
+		return s;
 	}
-	
-	// public Personne clone() throws CloneNotSupportedException { 
+	// public Personne clone() throws CloneNotSupportedException {
         // Personne ref = (Personne) super.clone();
 		
 		// return ref ; 

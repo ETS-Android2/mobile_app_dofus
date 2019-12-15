@@ -49,5 +49,6 @@
     <string name="view_obj">See my current Objectives</string>
     <string name="obj_title">Title</string>
     <string name="obj_content">Objective</string>
+    <string name="delete">delete</string>
 
 </resources>

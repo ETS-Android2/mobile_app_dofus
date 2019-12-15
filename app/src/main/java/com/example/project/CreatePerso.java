@@ -3,6 +3,7 @@ package com.example.project;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -53,6 +54,7 @@ public class CreatePerso extends AppCompatActivity {
     ArrayAdapter<String> adapterjob1;
     ArrayAdapter<String> adapterjob2;
     ArrayAdapter<String> adapterjob3;
+    String _idedit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,14 @@ public class CreatePerso extends AppCompatActivity {
         setContentView(R.layout.activity_create_perso);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        try{
+            Intent inte = getIntent();
+            _idedit = inte.getStringExtra("id_perso");
+        }catch (Exception e){
+
+        }
+
         et1 = (EditText) findViewById(R.id.editText);
         et2 = (EditText) findViewById(R.id.editText2);
         s1 = (Spinner) findViewById(R.id.spinner3);
@@ -94,7 +104,7 @@ public class CreatePerso extends AppCompatActivity {
         ArrayAdapter<String> adapterserv = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, servs);
         s3.setAdapter(adapterserv);
 
-        /// todo gestion des doublons possibles
+
         job1 = findJob();
         job2 = findJob();
         job3 = findJob();
@@ -205,22 +215,34 @@ public class CreatePerso extends AppCompatActivity {
     /// if thing in some_list : some_list.remove(thing)
 
     public void addPerso(View view) {
-        String name = et1.getText().toString();
-        int level = Integer.parseInt(et2.getText().toString());
-        Sex sex = Sex.valueOf(s1.getSelectedItem().toString());
-        Classes cla = Classes.valueOf(s2.getSelectedItem().toString());
-        int suc = Integer.parseInt(et3.getText().toString());
+        String result = "";
+        try {
+            String name = et1.getText().toString();
+            int level = Integer.parseInt(et2.getText().toString());
+            Sex sex = Sex.valueOf(s1.getSelectedItem().toString());
+            Classes cla = Classes.valueOf(s2.getSelectedItem().toString());
+            int suc = Integer.parseInt(et3.getText().toString());
 
-        Job[] joo = {   new Job(JobEnum.valueOf(s4.getSelectedItem().toString()), Integer.parseInt(et8.getText().toString())),
-                        new Job(JobEnum.valueOf(s5.getSelectedItem().toString()), Integer.parseInt(et9.getText().toString())),
-                        new Job(JobEnum.valueOf(s6.getSelectedItem().toString()), Integer.parseInt(et10.getText().toString()))};
-        Job[] jo = joo;
-        int[] car = {Integer.parseInt(et4.getText().toString()), Integer.parseInt(et5.getText().toString()), Integer.parseInt(et6.getText().toString()), Integer.parseInt(et7.getText().toString())};
-        Servers serv = Servers.valueOf(s3.getSelectedItem().toString());
-        String descr = tiett.getText().toString();
+            Job[] joo = {new Job(JobEnum.valueOf(s4.getSelectedItem().toString()), Integer.parseInt(et8.getText().toString())),
+                    new Job(JobEnum.valueOf(s5.getSelectedItem().toString()), Integer.parseInt(et9.getText().toString())),
+                    new Job(JobEnum.valueOf(s6.getSelectedItem().toString()), Integer.parseInt(et10.getText().toString()))};
+            Job[] jo = joo;
+            int[] car = {Integer.parseInt(et4.getText().toString()), Integer.parseInt(et5.getText().toString()), Integer.parseInt(et6.getText().toString()), Integer.parseInt(et7.getText().toString())};
+            Servers serv = Servers.valueOf(s3.getSelectedItem().toString());
+            String descr = tiett.getText().toString();
 
-        Personnage perso = new Personnage(name,level, sex, cla, suc, jo, car, serv, descr);
-        long _id = dbHandler.addPersoHandler(perso);
+            Personnage perso = new Personnage(name, level, sex, cla, suc, jo, car, serv, descr);
+
+            if (_idedit != null) {
+                dbHandler.updatePersoHandler(perso);
+            } else {
+                long _id = dbHandler.addPersoHandler(perso);
+            }
+            result = "enregistrement effectué";
+        }
+        catch(Exception e) {
+
+        }
         et1.setText("");
         et2.setText("");
         et3.setText("");
@@ -232,7 +254,7 @@ public class CreatePerso extends AppCompatActivity {
         et9.setText("");
         et10.setText("");
         tiett.setText("");
-        confirm.setText("enregistrement effectué");
+        confirm.setText(result);
     }
 
     public List<String> findSex(){;
