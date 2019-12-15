@@ -24,4 +24,5 @@
     <string name="news_menu_headtitle">News</string>
     <string name="wait">Please wait</string>
     <string name="load">The application is preparing itself...</string>
+    <string name="share">Share</string>
 </resources>

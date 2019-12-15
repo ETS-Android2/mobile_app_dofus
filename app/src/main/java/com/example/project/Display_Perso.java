@@ -32,6 +32,12 @@ public class Display_Perso extends AppCompatActivity {
         return pers;
     }
 
+    public void sendP() {
+       // myIntent = new Intent(this, DisplayObj.class);
+      //  myIntent.putExtra("id_obj", _id);
+       // startActivity(myIntent);
+    }
+
     public void refreshScreen(){
         dis.setText("");
     }

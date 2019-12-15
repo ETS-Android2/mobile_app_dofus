@@ -44,4 +44,9 @@
     <string name="wait">Please wait</string>
     <string name="load">The application is preparing itself...</string>
 
+    <!--my obj-->
+    <string name="view_obj">See my current Objectives</string>
+    <string name="obj_title">Title</string>
+    <string name="obj_content">Objective</string>
+
 </resources>
