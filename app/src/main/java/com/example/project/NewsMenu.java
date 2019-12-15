@@ -73,16 +73,11 @@ public class NewsMenu extends Activity {
             XMLReader xr = sp.getXMLReader();
             /* Create a new ContentHandler and apply it to the XML-Reader*/
             xr.setContentHandler(myExampleHandler);
-
-            /* Parse the xml-data from our URL. */
-            xr.parse(new InputSource(url.openStream()));
-            /* Parsing has finished. */
-
-
-            NewsDataSet parsedNews = null;
             for(int i = 0; i<10;i ++){
-
-                parsedNews = myExampleHandler.getParsedData();
+                /* Parse the xml-data from our URL. */
+                xr.parse(new InputSource(url.openStream()));
+                /* Parsing has finished. */
+                NewsDataSet parsedNews = myExampleHandler.getParsedData(i);
                 actus[0][i] = parsedNews.toString();
                 actus[1][i] = parsedNews.getUrl();
 

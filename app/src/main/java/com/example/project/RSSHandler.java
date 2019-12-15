@@ -5,6 +5,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXNotRecognizedException;
 import org.xml.sax.helpers.DefaultHandler;
+import android.os.Handler;
 
 import java.io.IOException;
 
@@ -15,7 +16,7 @@ public class RSSHandler extends DefaultHandler {
     // Fields
     // ===========================================================
 
-    private static int tour = 0;
+    private int tour;
     private int instance_tour = 0;
     private boolean in_rss = false;
     private boolean in_item = false;
@@ -30,7 +31,9 @@ public class RSSHandler extends DefaultHandler {
     // Getter & Setter
     // ===========================================================
 
-    public  NewsDataSet getParsedData() {
+    public  NewsDataSet getParsedData(int i) {
+        setTour(i);
+        stop = false;
         return this.thisNewsDataSet;
     }
 
@@ -74,31 +77,29 @@ public class RSSHandler extends DefaultHandler {
             if (localName.equals("rss")) {
                 this.in_rss = false;
 
-            } else if (localName.equals("item")) {
-                this.in_item = false;
-            } else if (in_item == true) {
+            }else if (in_item == true) {
                 if (localName.equals("title")) {
                     this.in_title = false;
                 } else if (localName.equals("link")) {
                     this.in_url = false;
                 } else if (localName.equals("pubDate")) {
                     this.in_date = false;
-                }else if (localName.equals("item")){
+                }
+
+                if (localName.equals("item")) {
                     this.in_item = false;
-                    if ( getTour() <= instance_tour) {
+                    if (getTour() <= instance_tour) {
                         stop = true;
-                        reTour();
                     } else {
                         instance_tour += 1;
                     }
                 }
-
             }
     }
 
-    public static int getTour(){return tour;}
+    public int getTour(){return tour;}
 
-    public static void reTour(){tour ++;}
+    public void setTour(int i){tour = i;}
 
 
     /** Gets be called on the following structure:
