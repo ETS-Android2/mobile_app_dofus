@@ -43,6 +43,7 @@
     <string name="edit">Edit</string>
     <string name="wait">Please wait</string>
     <string name="load">The application is preparing itself...</string>
+    <string name="night_mode">Night mode</string>
 
     <!--my obj-->
     <string name="view_obj">See my current Objectives</string>

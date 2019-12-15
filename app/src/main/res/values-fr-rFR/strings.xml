@@ -25,4 +25,5 @@
     <string name="wait">Merci de patienter</string>
     <string name="load">L\'application se prépare...</string>
     <string name="share">Partager</string>
+    <string name="night_mode">Mode nuit</string>
 </resources>
