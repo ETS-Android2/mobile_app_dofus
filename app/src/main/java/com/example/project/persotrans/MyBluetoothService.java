@@ -16,16 +16,8 @@ import java.io.OutputStream;
 
 public class MyBluetoothService {
     private static final String TAG = "MY_APP_DEBUG_TAG";
-    private Handler handler; // handler that gets info from Bluetooth service
+    private Handler handler;
 
-    // Defines several constants used when transmitting messages between the
-    // service and the UI.
-    private interface MessageConstants {
-        public static final int MESSAGE_READ = 0;
-        public static final int MESSAGE_WRITE = 1;
-        public static final int MESSAGE_TOAST = 2;
-
-    }
 
     private class ConnectedThread extends Thread {
         private final BluetoothSocket mmSocket;
@@ -83,11 +75,6 @@ public class MyBluetoothService {
             }
 
         }
-
-
-
-
-//
 
         // Call this method from the main activity to shut down the connection.
         public void cancel() {

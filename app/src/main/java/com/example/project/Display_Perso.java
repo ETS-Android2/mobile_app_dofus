@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.project.appclasses.Personnage;
 import com.example.project.database_dofusm.DofusMDBHandler;
+import com.example.project.persotrans.MyBluetoothService;
 
 import java.util.List;
 import java.util.Set;
@@ -26,7 +27,7 @@ public class Display_Perso extends AppCompatActivity {
     private TextView dis;
     private Personnage p;
     private DofusMDBHandler dbHandler;
-    private String _id = "";
+    private String _idff = "";
 
     public static final int REQUEST_ENABLE_BT=1;
     ArrayAdapter<String> adapter;
@@ -37,6 +38,9 @@ public class Display_Perso extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dbHandler = new DofusMDBHandler(this);
+        Intent intev = getIntent();
+        _idff = intev.getStringExtra("id_perso");
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         int theme = prefs.getInt("theme", 0);
 
@@ -47,17 +51,18 @@ public class Display_Perso extends AppCompatActivity {
             setTheme(R.style.AppTheme);
         }
         setContentView(R.layout.activity_display__perso);
-        Intent inte = getIntent();
-        _id = inte.getStringExtra("id_perso");
-        DofusMDBHandler dbHandler = new DofusMDBHandler(this);
+
+
+
+
         dis = (TextView) findViewById(R.id.textView5);
-        dis.setText(showPerso(Integer.parseInt(_id)));
+        dis.setText(showPerso(Integer.parseInt(_idff)));
         initialize_layout();
 
     }
 
-    public String showPerso(int id){
-        p = dbHandler.findPersoHandler(Integer.toString(id));
+    public String showPerso(int idnn){
+        p = dbHandler.findPersoHandler(Integer.toString(idnn));
         dis.setText("");
         String pers = p.toString();
         return pers;
@@ -65,7 +70,7 @@ public class Display_Perso extends AppCompatActivity {
 
     public void delPerso(View view){
 
-        int why = Integer.parseInt(_id);
+        int why = Integer.parseInt(_idff);
         boolean succ = dbHandler.deletePersoHandler(why);
         Intent myIntent = new Intent(this, MyPerso.class);
         startActivity(myIntent);
@@ -73,14 +78,14 @@ public class Display_Perso extends AppCompatActivity {
 
     public void editPerso(View view){
         Intent myIntent = new Intent(this, CreatePerso.class);
-        myIntent.putExtra("id_perso", _id);
+        myIntent.putExtra("id_perso", _idff);
         startActivity(myIntent);
     }
 
     public void sendP(View view) {
         initialize_layout();
         initbluetooth();
-
+        //writeSerialized(p);
     }
 
     public void initbluetooth(){

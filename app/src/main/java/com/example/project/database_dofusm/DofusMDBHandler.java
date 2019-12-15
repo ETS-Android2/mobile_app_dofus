@@ -572,11 +572,10 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
      * recreate an object personnage from the informations in the database
      * */
     public Personnage findPersoHandler(String perso_id) {
-        String query = "Select * FROM " + TABLE_PERSO + " WHERE " + KEY_ID + " = " + "'" + perso_id + "'";
-
-        Log.v("attrclassquer",query);
+        String query = "Select * FROM " + TABLE_PERSO + " WHERE " + KEY_ID + " = ?";
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
+        String[] ar = {perso_id};
+        Cursor cursor = db.rawQuery(query, ar);
         Personnage perso = new Personnage();
         if (cursor.moveToFirst()) {
             cursor.moveToFirst();
@@ -599,6 +598,9 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
         return perso;
     }
 
+    /**
+     * recreate an objective knowing its id
+     * */
     public Objectives findObjHandler(String obj_id) {
         String query = "Select * FROM " + TABLE_OBJEC + " WHERE " + KEY_ID + " = " + "'" + obj_id + "'";
 

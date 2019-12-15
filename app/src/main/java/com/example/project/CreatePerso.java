@@ -178,7 +178,6 @@ public class CreatePerso extends AppCompatActivity {
     private AdapterView.OnItemSelectedListener listup2 = new AdapterView.OnItemSelectedListener(){
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            //String select = ((TextView) view ).getText().toString();
 
             adapterjob1.add(jobex2.get(0));
             adapterjob3.add(jobex2.get(0));
@@ -202,7 +201,6 @@ public class CreatePerso extends AppCompatActivity {
     private AdapterView.OnItemSelectedListener listup3 = new AdapterView.OnItemSelectedListener(){
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-           // String select = ((TextView) view ).getText().toString();
 
             adapterjob1.add(jobex3.get(0));
             adapterjob2.add(jobex3.get(0));
