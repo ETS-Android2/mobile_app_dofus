@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DofusMaker</string>
+    <string name="action_sign_in">Se connecter ou s\'enregistrer</string>
+    <string name="action_sign_in_short">S\'enregistrer</string>
+    <string name="caragi">Agilité</string>
+    <string name="welcome">Bienvenue</string>
+    <string name="carint">Intelligence</string>
+    <string name="carluk">Chance</string>
+    <string name="carstr">Force</string>
+    <string name="clvl">Level</string>
+    <string name="cname">Nom</string>
+</resources>
