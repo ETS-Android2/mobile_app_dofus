@@ -18,19 +18,19 @@
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
+    <string name="welcome">Welcome</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_my_perso">MyPerso</string>
 
     <!--Create perso-->
-    <string name="cname">Nom</string>
-    <string name="clvl">Niveau</string>
-    <string name="carstr">STR</string>
+    <string name="cname">Name</string>
+    <string name="clvl">Level</string>
+    <string name="carstr">Strength</string>
     <string name="caragi">AGI</string>
-    <string name="carluk">LUK</string>
-    <string name="carint">INT</string>
+    <string name="carluk">Luck</string>
+    <string name="carint">Intelligence</string>
     <string name="descr">DESCRIPTION</string>
     <string name="succ">SUCCES</string>
     <string name="create_perso">CREATION D\'UN PERSONNAGE</string>

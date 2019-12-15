@@ -13,13 +13,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent loading= new Intent(MainActivity.this, loadingActivity.class);
+        Intent loading = new Intent(MainActivity.this, loadingActivity.class);
         startActivity(loading);
 
-        try{
+        try {
             Thread.sleep(2000);
+        } catch (Exception e) {
         }
-        catch(Exception e){}
 
         Intent mainMenu = new Intent(MainActivity.this, MainMenu.class);
         startActivity(mainMenu);
