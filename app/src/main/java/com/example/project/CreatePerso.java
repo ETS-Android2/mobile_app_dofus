@@ -72,8 +72,7 @@ public class CreatePerso extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_perso);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
 
         try{
             Intent inte = getIntent();
@@ -231,14 +230,22 @@ public class CreatePerso extends AppCompatActivity {
         try {
             String name = et1.getText().toString();
             int level = Integer.parseInt(et2.getText().toString());
+
+            if(level > 200) level = 200;
+
             Sex sex = Sex.valueOf(s1.getSelectedItem().toString());
+
             Classes cla = Classes.valueOf(s2.getSelectedItem().toString());
+
             int suc = Integer.parseInt(et3.getText().toString());
+
+            if(suc > 20000) level = 20000;
 
             Job[] joo = {new Job(JobEnum.valueOf(s4.getSelectedItem().toString()), Integer.parseInt(et8.getText().toString())),
                     new Job(JobEnum.valueOf(s5.getSelectedItem().toString()), Integer.parseInt(et9.getText().toString())),
                     new Job(JobEnum.valueOf(s6.getSelectedItem().toString()), Integer.parseInt(et10.getText().toString()))};
             Job[] jo = joo;
+
             int[] car = {Integer.parseInt(et4.getText().toString()), Integer.parseInt(et5.getText().toString()), Integer.parseInt(et6.getText().toString()), Integer.parseInt(et7.getText().toString())};
             Servers serv = Servers.valueOf(s3.getSelectedItem().toString());
             String descr = tiett.getText().toString();

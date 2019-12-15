@@ -26,4 +26,17 @@
     <string name="load">L\'application se prépare...</string>
     <string name="share">Partager</string>
     <string name="night_mode">Mode nuit</string>
+    <string name="delete">Supprimer</string>
+    <string name="obj_content">Objectif</string>
+    <string name="obj_title">Titre</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Mot de passe</string>
+    <string name="refresh">Actualiser</string>
+    <string name="save">Enregistrer</string>
+    <string name="succ">Succès</string>
+    <string name="title_activity_login">S\'enregistrer</string>
+    <string name="title_activity_my_perso">Mon Perso</string>
+    <string name="view_obj">Voir mes objectifs</string>
+    <string name="set_objective">Définir un objectif</string>
+    <string name="Set_date">Définir une date</string>
 </resources>
