@@ -26,12 +26,13 @@ public class Display_Perso extends AppCompatActivity {
     private TextView dis;
     private Personnage p;
     private DofusMDBHandler dbHandler;
-    private String _id;
-    ListView mListView;
+    private String _id = "";
+
     public static final int REQUEST_ENABLE_BT=1;
     ArrayAdapter<String> adapter;
     BluetoothAdapter ada;
     Set<BluetoothDevice> pairedDevices;
+    ListView mListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +76,12 @@ public class Display_Perso extends AppCompatActivity {
     }
 
     public void sendP(View view) {
+        initialize_layout();
+        initbluetooth();
+
+    }
+
+    public void initbluetooth(){
         ada = BluetoothAdapter.getDefaultAdapter();
         if (ada != null ){
             if (!ada.isEnabled()) {
@@ -94,6 +101,8 @@ public class Display_Perso extends AppCompatActivity {
             }
         }
     }
+
+
 
     public void initialize_layout()
     {
