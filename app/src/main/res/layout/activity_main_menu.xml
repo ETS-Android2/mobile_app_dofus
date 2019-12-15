@@ -70,6 +70,17 @@
         app:layout_constraintTop_toBottomOf="@+id/button5"
         app:layout_constraintVertical_bias="1.0" />
 
+    <Button
+        android:id="@+id/button8"
+        android:layout_width="152dp"
+        android:layout_height="60dp"
+        android:onClick="myObj"
+        android:text="Objectives"
+        app:layout_constraintBottom_toTopOf="@+id/button6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

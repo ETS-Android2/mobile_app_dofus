@@ -1,4 +1,4 @@
-package com.example.project.persotrans;
+/*package com.example.project.persotrans;
 
 import android.util.Log;
 
@@ -43,7 +43,7 @@ public class ObjSend {
 
     //the object I am trying to send out and receive on the other size
 
-    public class Contact implements Serializable{
+    public class Contact implements Serializable {
 
         static final long serialVersionUID = 123456789123456789L;
 
@@ -51,7 +51,8 @@ public class ObjSend {
         private String name;
         private String phoneNumber;
 
-        public Contact(){}
+        public Contact() {
+        }
 
         public Contact(String id, String name, String phoneNumber) {
             this.id = id;
@@ -84,4 +85,7 @@ public class ObjSend {
         }
 
 
+    }
+
 }
+*/

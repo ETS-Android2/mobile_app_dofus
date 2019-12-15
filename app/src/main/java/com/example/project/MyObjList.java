@@ -16,10 +16,9 @@ import java.util.List;
 public class MyObjList extends AppCompatActivity {
 
 
-}
     private ListView mListView;
-    private List<String> personnages;
-    Intent myIntent;
+    private List<String> Objectives;
+    private Intent myIntent;
 
 
     @Override
@@ -27,15 +26,15 @@ public class MyObjList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_obj_list);
 
-        myIntent = new Intent(this, Display_Perso.class);
+        myIntent = new Intent(this, DisplayObj.class);
 
-        mListView = (ListView) findViewById(R.id.listview2);
+        mListView = (ListView) findViewById(R.id.listobj);
 
         //android.R.layout.simple_list_item_1 est une vue disponible de base dans le SDK android,
         //Contenant une TextView avec comme identifiant "@android:id/text1"
-        personnages = findPerso();
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(MyPerso.this,
-                android.R.layout.simple_list_item_1, personnages);
+        Objectives = findObj();
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(MyObjList.this,
+                android.R.layout.simple_list_item_1, Objectives);
         mListView.setAdapter(adapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -43,7 +42,7 @@ public class MyObjList extends AppCompatActivity {
                 String h = (String) parent.getItemAtPosition(position);
                 String s2 = h.substring(0, h.indexOf("."));
                 // get the id from the String and open a new activity displaying the character
-                myIntent.putExtra("id_perso", s2);
+                myIntent.putExtra("id_obj", s2);
                 startActivity(myIntent);
 
             }
@@ -51,8 +50,8 @@ public class MyObjList extends AppCompatActivity {
 
     }
 
-    public List<String> findPerso(){
+    public List<String> findObj(){
         DofusMDBHandler dbHandler = new DofusMDBHandler(this);
-        return dbHandler.getPersName();
+        return dbHandler.getObjIntroH();
     }
 }

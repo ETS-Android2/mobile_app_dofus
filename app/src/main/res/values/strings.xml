@@ -38,4 +38,8 @@
     <string name="jlvl">LVL</string>
 
 
+    <!-- Display perso -->
+    <string name="share">share</string>
+    <string name="edit">edit</string>
+
 </resources>

@@ -44,6 +44,11 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
     private static final String TABLE_JOB ="job";
     private static final String TABLE_JOB_PERSO = "job_perso";
 
+    private static final String TABLE_OBJEC = "objectives";
+    private static final String TABLE_USER = "user";
+    private static final String TABLE_OBJEC_USER = "objec_user";
+
+    // todo
 
     /////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////
@@ -92,6 +97,16 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
     // JOB_PERSO Table
     private static final String KEY_PERSO_ID = "perso_id";
     private static final String KEY_JOB_ID = "job_id";
+
+    // USER Table
+
+    // OBJEC Table
+    private static final String KEY_OBJEC_NAME = "objectif_nom";
+    private static final String KEY_OBJEC_CONTENT = "objectif_content";
+    private static final String KEY_OBJEC_DATE = "obj_date";
+
+    // OBJEC_USER Table
+    //todo user+user_obj
 
     ////////////////////////////////////////////////
     ////////////////////////////////////////////////
@@ -159,6 +174,15 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
             + KEY_PERSO_ID + " INTEGER,"
             + KEY_CREATED_AT + " DATETIME" + ");";
 
+    // Job_Perso table create statement
+    private static final String CREATE_TABLE_OBJEC = "CREATE TABLE "
+            + TABLE_OBJEC + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,,"
+            + KEY_OBJEC_NAME + " TEXT,"
+            + KEY_OBJEC_DATE + " DATETIME"
+            + KEY_OBJEC_CONTENT + " TEXT,"
+            + KEY_CREATED_AT + " DATETIME " + ");";
+
+
 
     public DofusMDBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -167,6 +191,7 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         // creating required
+        db.execSQL(CREATE_TABLE_OBJEC);
         db.execSQL(CREATE_TABLE_JOB);
         db.execSQL(CREATE_TABLE_JOB_PERSO);
         db.execSQL(CREATE_TABLE_CARAC);
@@ -185,6 +210,7 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // on upgrade drop older tables
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_OBJEC);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_JOB);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_JOB_PERSO);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_CARAC);
@@ -314,6 +340,20 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
         cursor.close();
         return u;
     }
+
+    public List<String> getObjIntroH(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "Select a."+KEY_ID + ", " + KEY_OBJEC_NAME+" FROM " + TABLE_OBJEC; // +" a INNER JOIN " +TABLE_CLASSE +" b ON a."+ KEY_CLASSE_ID+" = b."+KEY_ID;
+        Cursor cursor = db.rawQuery(query, null);
+        List<String> u = new ArrayList<String>();
+        for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+            u.add(cursor.getString(cursor.getColumnIndex(KEY_ID))+"." +cursor.getString(cursor.getColumnIndex(KEY_OBJEC_NAME)));
+        }
+        cursor.close();
+        return u;
+    }
+
+
 
     public List<String> getSexHandler(){
         return getListAttrHandler(KEY_SEX_NAME, TABLE_SEX); }
