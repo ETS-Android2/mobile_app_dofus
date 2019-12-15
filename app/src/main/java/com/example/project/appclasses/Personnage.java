@@ -89,7 +89,7 @@ public class Personnage implements Serializable {
 	/**Default Constructor of the class
 	**/
 	public Personnage() {
-		this(0, "Grid", 10, Sex.MALE, Classes.CRA, 0, null, null, Servers.SERVER, "this is a character");
+		this(0, "Grid", 10, Sex.MALE, Classes.CRA, 0, null, null, Servers.OMBRE, "this is a character");
 		Job[] a = {new Job()};
 		this.setJob(a);
 		int[] b = {10,10,10,10};

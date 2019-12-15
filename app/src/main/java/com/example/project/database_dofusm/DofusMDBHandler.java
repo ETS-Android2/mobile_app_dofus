@@ -106,7 +106,7 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
     private static final String KEY_OBJEC_NAME = "objectif_nom";
     private static final String KEY_OBJEC_CONTENT = "objectif_content";
     private static final String KEY_OBJEC_DATE = "obj_date";
-    private static final String KEY_OBJEC_USERID = "obj_date";
+    private static final String KEY_OBJEC_USERID = "obj_user_id";
 
     // OBJEC_USER Table
     //todo user+user_obj
@@ -356,7 +356,7 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
 
     public List<String> getObjIntroH(){
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "Select a."+KEY_ID + ", " + KEY_OBJEC_NAME+" FROM " + TABLE_OBJEC; // + " WHERE " + KEY_OBJEC_USERID +" = ? ";
+        String query = "Select "+KEY_ID + ", " + KEY_OBJEC_NAME+" FROM " + TABLE_OBJEC; // + " WHERE " + KEY_OBJEC_USERID +" = ? ";
         Cursor cursor = db.rawQuery(query, null);
         List<String> u = new ArrayList<String>();
         for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {

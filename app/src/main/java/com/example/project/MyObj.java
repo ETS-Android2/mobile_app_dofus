@@ -26,10 +26,10 @@ public class MyObj extends AppCompatActivity {
     }
 
 
-    public void myPerso(View view){
+    public void myObjL(View view){
 
-        Intent loginActivity = new Intent(MyObj.this, MyObjList.class);
-        startActivity(loginActivity);
+        Intent Objlist = new Intent(MyObj.this, MyObjList.class);
+        startActivity(Objlist);
 
     }
 }

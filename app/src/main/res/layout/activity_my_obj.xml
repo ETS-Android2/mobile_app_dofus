@@ -29,13 +29,22 @@
                 android:layout_height="wrap_content"
                 android:text="TextView" />
 
+            <EditText
+                android:id="@+id/editText12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="@string/obj_title" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:hint="@string/obj_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <EditText
@@ -49,12 +58,14 @@
                 android:id="@+id/button7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="saveObj"
                 android:text="@string/save" />
 
             <Button
                 android:id="@+id/button13"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="myObjL"
                 android:text="@string/view_obj" />
         </LinearLayout>
     </ScrollView>
