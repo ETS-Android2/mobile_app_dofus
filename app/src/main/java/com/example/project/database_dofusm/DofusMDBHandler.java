@@ -176,9 +176,9 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
 
     // Job_Perso table create statement
     private static final String CREATE_TABLE_OBJEC = "CREATE TABLE "
-            + TABLE_OBJEC + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,,"
+            + TABLE_OBJEC + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + KEY_OBJEC_NAME + " TEXT,"
-            + KEY_OBJEC_DATE + " DATETIME"
+            + KEY_OBJEC_DATE + " DATETIME,"
             + KEY_OBJEC_CONTENT + " TEXT,"
             + KEY_CREATED_AT + " DATETIME " + ");";
 
