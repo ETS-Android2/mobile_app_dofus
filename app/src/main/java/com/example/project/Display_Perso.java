@@ -8,6 +8,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.project.appclasses.Personnage;
@@ -22,7 +25,11 @@ public class Display_Perso extends AppCompatActivity {
     private Personnage p;
     private DofusMDBHandler dbHandler;
     private String _id;
+    ListView mListView;
     public static final int REQUEST_ENABLE_BT=1;
+    ArrayAdapter<String> adapter;
+    BluetoothAdapter ada;
+    Set<BluetoothDevice> pairedDevices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,24 +37,22 @@ public class Display_Perso extends AppCompatActivity {
         setContentView(R.layout.activity_display__perso);
         Intent inte = getIntent();
         _id = inte.getStringExtra("id_perso");
+        DofusMDBHandler dbHandler = new DofusMDBHandler(this);
         dis = (TextView) findViewById(R.id.textView5);
         dis.setText(showPerso(Integer.parseInt(_id)));
-        Log.v("ffffffffffffffffffffffff iiiiiiiiiiiiiiiiiiiiiiiiiii ddddddddddddddddddd",_id);
+        initialize_layout();
     }
 
     public String showPerso(int id){
-        DofusMDBHandler dbHandler = new DofusMDBHandler(this);
         p = dbHandler.findPersoHandler(Integer.toString(id));
-        refreshScreen();
+        dis.setText("");
         String pers = p.toString();
         return pers;
     }
 
     public void delPerso(View view){
-        Log.v("ffffffffffffffffffffffff iiiiiiiiiiiiiiiiiiiiiiiiiii ddddddddddddddddddd",_id);
         int why = Integer.parseInt(_id);
-        Log.v("ffffffffffffffffffffffff iiiiiiiiiiiiiiiiiiiiiiiiiii ddddddddddddddddddd",""+why);
-        dbHandler.deletePersoHandler(why);
+        boolean succ = dbHandler.deletePersoHandler(why);
         Intent myIntent = new Intent(this, MyPerso.class);
         startActivity(myIntent);
     }
@@ -59,26 +64,31 @@ public class Display_Perso extends AppCompatActivity {
     }
 
     public void sendP(View view) {
-        BluetoothAdapter ada = BluetoothAdapter.getDefaultAdapter();
+        ada = BluetoothAdapter.getDefaultAdapter();
         if (ada != null ){
             if (!ada.isEnabled()) {
                 Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                 startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
             }
-            Set<BluetoothDevice> pairedDevices = ada.getBondedDevices();
+            pairedDevices = ada.getBondedDevices();
 
             if (pairedDevices.size() > 0) {
                 // There are paired devices. Get the name and address of each paired device.
                 for (BluetoothDevice device : pairedDevices) {
                     String deviceName = device.getName();
                     String deviceHardwareAddress = device.getAddress(); // MAC address
+
+                    adapter.add(device.getName() + "\n" + device.getAddress());
                 }
             }
         }
     }
 
-    public void refreshScreen(){
-        dis.setText("");
+    public void initialize_layout()
+    {
+        mListView = (ListView)findViewById(R.id.listblu);
+        adapter = new ArrayAdapter(getApplicationContext(),R.layout.support_simple_spinner_dropdown_item);
+        mListView.setAdapter(adapter);
     }
 
 
