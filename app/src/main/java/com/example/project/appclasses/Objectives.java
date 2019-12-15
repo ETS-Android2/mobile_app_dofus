@@ -5,22 +5,32 @@ public class Objectives {
     int id;
     String title;
     String content;
+    String date;
     int user_id;
 
 
-    public Objectives(String title, String content, int user_id) {
+    public Objectives(String title, String content, String date,int user_id) {
         this.title = title;
         this.content = content;
         this.user_id = user_id;
+        this.date = date;
     }
 
-    public Objectives(int id, String title, String content, int user_id) {
+    public Objectives(int id, String title, String content, String date, int user_id) {
         this.id = id;
         this.title = title;
         this.content = content;
+        this.date = date;
         this.user_id = user_id;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     public int getId() {
         return id;

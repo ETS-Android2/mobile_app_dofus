@@ -7,6 +7,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 
 import com.example.project.appclasses.Job;
+import com.example.project.appclasses.Objectives;
 import com.example.project.appclasses.Personnage;
 import com.example.project.enumdofusm.Classes;
 import com.example.project.enumdofusm.JobEnum;
@@ -181,8 +182,8 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_OBJEC = "CREATE TABLE "
             + TABLE_OBJEC + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + KEY_OBJEC_NAME + " TEXT,"
-            + KEY_OBJEC_DATE + " DATETIME,"
             + KEY_OBJEC_CONTENT + " TEXT,"
+            + KEY_OBJEC_DATE + " TEXT,"
             + KEY_OBJEC_USERID + " INTEGER,"
             + KEY_CREATED_AT + " DATETIME " + ");";
 
@@ -260,6 +261,20 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
             id = -1;
         }
         return id;
+    }
+
+    public long addObjHandler(Objectives ob) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_OBJEC_NAME, ob.getTitle());
+        values.put(KEY_OBJEC_DATE, ob.getDate());
+        values.put(KEY_OBJEC_CONTENT, ob.getContent());
+        //values.put(KEY_OBJEC_USERID , );
+        // insert row
+        long _id = db.insert(TABLE_OBJEC, null, values);
+        db.close();
+        return _id;
     }
 
     public long addPersoHandler(Personnage perso) {
@@ -381,7 +396,7 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
 
     /**
      *
-     *
+     *get general information about a character
      * */
     public List<String> getPersName(){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -395,6 +410,10 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
         return u;
     }
 
+
+    /**
+     * get general information about an objective
+     * */
     public List<String> getObjIntroH(){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "Select "+KEY_ID + ", " + KEY_OBJEC_NAME+" FROM " + TABLE_OBJEC; // + " WHERE " + KEY_OBJEC_USERID +" = ? ";
@@ -407,6 +426,8 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
         return u;
     }
 
+
+    //// getter of the different enum values ///
 
 
     public List<String> getSexHandler(){
@@ -438,7 +459,9 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
         return u;
     }
 
-
+    /**
+     * fonction allowing the deletion of a character
+     * */
     public boolean deletePersoHandler(int ID) {
         boolean result = false;
         SQLiteDatabase db = this.getWritableDatabase();
@@ -486,6 +509,10 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
 
     }
 
+
+    /**
+     *
+     * */
     public String getAttrName(SQLiteDatabase db, String TABLE_NAME, String COLUMN_NAME, int id){
 
         String query = "Select * FROM " + TABLE_NAME + " WHERE " + COLUMN_NAME + " = " + "'" + id + "'";
@@ -501,6 +528,10 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
         return name;
     }
 
+
+    /**
+     *
+     * */
     public int[] retrievecarac(SQLiteDatabase db, int id){
         String query = "Select * FROM " + TABLE_CARAC + " WHERE " + KEY_ID + " = " + "'" + id + "'";
         Cursor cursor = db.rawQuery(query, null);
@@ -513,9 +544,10 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
         return car;
     }
 
+    /**
+     * retrieve the informations regarding the jobs
+     * */
     public Job[] retrieveJobs(SQLiteDatabase db, int id){
-
-
 
         String query = "Select "+ KEY_JOB_LEVEL +", "+ KEY_JOBNAME_NAME +" FROM ( " + TABLE_JOB_PERSO + " a INNER JOIN "+TABLE_JOB+" b ON a." +KEY_JOB_ID+ " = b."+KEY_ID+" ) c INNER JOIN "+TABLE_JOBNAME+" d ON c." + KEY_JOBNAME_ID + " = d."+KEY_ID+" WHERE " + KEY_PERSO_ID + "= '" + id + "'";
         Cursor cursor = db.rawQuery(query, null);
@@ -535,6 +567,10 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
         return a;
     }
 
+
+    /**
+     * recreate an object personnage from the informations in the database
+     * */
     public Personnage findPersoHandler(String perso_id) {
         String query = "Select * FROM " + TABLE_PERSO + " WHERE " + KEY_ID + " = " + "'" + perso_id + "'";
 
@@ -565,6 +601,11 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
 
 
     /// init
+    /**
+     * function filling the database with the necessary values on create
+     *
+     * */
+
     public boolean addClasse(SQLiteDatabase db) {
         ContentValues values;
         boolean classe_initialized = false;

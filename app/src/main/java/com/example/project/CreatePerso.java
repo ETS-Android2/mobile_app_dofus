@@ -54,6 +54,7 @@ public class CreatePerso extends AppCompatActivity {
     ArrayAdapter<String> adapterjob1;
     ArrayAdapter<String> adapterjob2;
     ArrayAdapter<String> adapterjob3;
+    String _idedit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,10 +62,13 @@ public class CreatePerso extends AppCompatActivity {
         setContentView(R.layout.activity_create_perso);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         try{
             Intent inte = getIntent();
-            String _id = inte.getStringExtra("id_perso");
-        }catch (Exception e){}
+            _idedit = inte.getStringExtra("id_perso");
+        }catch (Exception e){
+
+        }
 
         et1 = (EditText) findViewById(R.id.editText);
         et2 = (EditText) findViewById(R.id.editText2);
@@ -100,7 +104,7 @@ public class CreatePerso extends AppCompatActivity {
         ArrayAdapter<String> adapterserv = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, servs);
         s3.setAdapter(adapterserv);
 
-        /// todo gestion des doublons possibles
+
         job1 = findJob();
         job2 = findJob();
         job3 = findJob();
@@ -225,8 +229,17 @@ public class CreatePerso extends AppCompatActivity {
         Servers serv = Servers.valueOf(s3.getSelectedItem().toString());
         String descr = tiett.getText().toString();
 
-        Personnage perso = new Personnage(name,level, sex, cla, suc, jo, car, serv, descr);
-        long _id = dbHandler.addPersoHandler(perso);
+        Personnage perso = new Personnage(name, level, sex, cla, suc, jo, car, serv, descr);
+        String result = "";
+        try {
+            if (_idedit != null) {
+                dbHandler.updatePersoHandler(perso);
+            } else {
+                long _id = dbHandler.addPersoHandler(perso);
+            }
+            result = "enregistrement effectué";
+        }
+        catch(Exception e) {}
         et1.setText("");
         et2.setText("");
         et3.setText("");
@@ -238,7 +251,7 @@ public class CreatePerso extends AppCompatActivity {
         et9.setText("");
         et10.setText("");
         tiett.setText("");
-        confirm.setText("enregistrement effectué");
+        confirm.setText(result);
     }
 
     public List<String> findSex(){;
