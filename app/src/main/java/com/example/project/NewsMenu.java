@@ -12,7 +12,9 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -27,12 +29,23 @@ public class NewsMenu extends Activity {
 
     private final String MY_DEBUG_TAG = "rss";
     private ListView mListView;
+    public static final String PREFS_NAME = "MyPrefsFile";
     private String[][] actus = new String[2][10];
 
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        int theme = prefs.getInt("theme", 0);
+
+        if(theme == 1){
+            setTheme(R.style.DarkAppTheme);
+        }
+        else{
+            setTheme(R.style.AppTheme);
+        }
+
         setContentView(R.layout.activity_news_menu);
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
@@ -69,7 +82,7 @@ public class NewsMenu extends Activity {
             NewsDataSet parsedNews = null;
             for(int i = 0; i<10;i ++){
 
-                parsedNews = myExampleHandler.getParsedData(i);
+                parsedNews = myExampleHandler.getParsedData();
                 actus[0][i] = parsedNews.toString();
                 actus[1][i] = parsedNews.getUrl();
 

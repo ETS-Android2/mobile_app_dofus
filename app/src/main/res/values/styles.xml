@@ -19,12 +19,16 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <!-- Dark application theme. -->
-    <style name="DarkAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="DarkAppTheme" parent="ThemeOverlay.AppCompat.Dark">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/ThemecolorPrimary</item>
+        <item name="colorPrimary">@color/ThemecolorAccent</item>
         <item name="colorPrimaryDark">@color/ThemecolorPrimaryDark</item>
         <item name="colorAccent">@color/ThemecolorAccent</item>
         <item name="android:colorBackground">@color/softBG</item>
+        <item name="android:textColorPrimary">@color/TextWhite</item>
+        <item name="android:textColorSecondary">@color/TextWhite</item>
+        <item name="editTextColor">@color/TextWhite</item>
+        <item name="android:textColorTertiary">@color/TextWhite</item>
     </style>
 
     <style name="DarkAppTheme.NoActionBar">

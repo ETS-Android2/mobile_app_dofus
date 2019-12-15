@@ -32,7 +32,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/cname"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                />
 
             <EditText
                 android:id="@+id/editText2"

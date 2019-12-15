@@ -140,7 +140,7 @@ public class MainMenu extends AppCompatActivity {
                     m.start();
                     playingMusic = true;
                 }
-                else{m.pause();  playingMusic = false;}
+                else{m.stop();m.release(); m = MediaPlayer.create(MainMenu.this, R.raw.m); playingMusic = false;}
             }
         });
 

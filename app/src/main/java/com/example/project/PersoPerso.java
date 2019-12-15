@@ -2,6 +2,8 @@ package com.example.project;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -29,9 +31,19 @@ public class PersoPerso extends AppCompatActivity {
     private EditText c7;
     private EditText c8;
     private DofusMDBHandler dbHandler;
+    public static final String PREFS_NAME = "MyPrefsFile";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        int theme = prefs.getInt("theme", 0);
+
+        if(theme == 1){
+            setTheme(R.style.DarkAppTheme);
+        }
+        else{
+            setTheme(R.style.AppTheme);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perso_perso);
         c1 = (EditText) findViewById(R.id.pers1);

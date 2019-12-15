@@ -3,5 +3,7 @@
     <color name="ThemecolorPrimary">#6B9900</color>
     <color name="ThemecolorPrimaryDark">#4A6900</color>
     <color name="ThemecolorAccent">#A2F000</color>
-    <color name="softBG">#182000</color>
+    <color name="darkButtons">#527016</color>
+    <color name="softBG">#121A01</color>
+    <color name="TextWhite">#FFFFFF</color>
 </resources>
