@@ -21,19 +21,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="242dp"
-        android:layout_height="211dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.095"
-        app:srcCompat="@drawable/ic_action_name"
-        tools:srcCompat="@drawable/dofus_maker_logo256px" />
-
     <Button
         android:id="@+id/button3"
         android:layout_width="150dp"
@@ -71,25 +58,26 @@
         app:layout_constraintTop_toBottomOf="@+id/button5" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/button8"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginTop="50dp"
+        android:onClick="myObj"
         android:text="@string/objectives"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button6" />
 
-    <Button
-        android:id="@+id/button8"
-        android:layout_width="152dp"
-        android:layout_height="60dp"
-        android:onClick="myObj"
-        android:text="Objectives"
-        app:layout_constraintBottom_toTopOf="@+id/button6"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/dofus_maker_logo256px" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
