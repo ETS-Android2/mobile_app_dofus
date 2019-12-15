@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,7 +22,7 @@ import java.util.List;
 import java.util.Set;
 
 public class Display_Perso extends AppCompatActivity {
-
+    public static final String PREFS_NAME = "MyPrefsFile";
     private TextView dis;
     private Personnage p;
     private DofusMDBHandler dbHandler;
@@ -34,6 +36,15 @@ public class Display_Perso extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        int theme = prefs.getInt("theme", 0);
+
+        if(theme == 1){
+            setTheme(R.style.DarkAppTheme);
+        }
+        else{
+            setTheme(R.style.AppTheme);
+        }
         setContentView(R.layout.activity_display__perso);
         Intent inte = getIntent();
         _id = inte.getStringExtra("id_perso");

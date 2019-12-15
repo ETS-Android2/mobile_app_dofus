@@ -2,7 +2,9 @@ package com.example.project;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,11 +21,21 @@ public class MyObjList extends AppCompatActivity {
     private ListView mListView;
     private List<String> Objectives;
     private Intent myIntent;
+    public static final String PREFS_NAME = "MyPrefsFile";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        int theme = prefs.getInt("theme", 0);
+
+        if(theme == 1){
+            setTheme(R.style.DarkAppTheme);
+        }
+        else{
+            setTheme(R.style.AppTheme);
+        }
         setContentView(R.layout.activity_my_obj_list);
 
         myIntent = new Intent(this, DisplayObj.class);
