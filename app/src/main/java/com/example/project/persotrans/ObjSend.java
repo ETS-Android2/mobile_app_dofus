@@ -1,22 +1,28 @@
-/*package com.example.project.persotrans;
+package com.example.project.persotrans;
 
 import android.util.Log;
+
+import com.example.project.appclasses.Personnage;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.Socket;
 
 public class ObjSend {
 
     private static String TAG = "tag";
+    private Socket mmSocket;
+    private ObjectInputStream mmInStream;
+
 
     //mmSocket is the socket i got from a bluetooth connection
     //this is for sending an object
-    public void writeSerialized() {
-        Object contact = new Contact("Allen", "Patterson", "256-369-241");
+    public void writeSerialized(Personnage pers) {
+        Object p = new Personnage(pers);
         try {
             ObjectOutputStream oos = new ObjectOutputStream(mmSocket.getOutputStream());
-            oos.writeObject(contact);
+            oos.writeObject(p);
             oos.close();
         } catch (Exception e) {
             Log.e(TAG, "Error ObjectOutputStream: " + e.getLocalizedMessage());
@@ -41,51 +47,5 @@ public class ObjSend {
         }
     }
 
-    //the object I am trying to send out and receive on the other size
-
-    public class Contact implements Serializable {
-
-        static final long serialVersionUID = 123456789123456789L;
-
-        private String id;
-        private String name;
-        private String phoneNumber;
-
-        public Contact() {
-        }
-
-        public Contact(String id, String name, String phoneNumber) {
-            this.id = id;
-            this.name = name;
-            this.phoneNumber = phoneNumber;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getPhoneNumber() {
-            return phoneNumber;
-        }
-
-        public void setPhoneNumber(String phoneNumber) {
-            this.phoneNumber = phoneNumber;
-        }
-
-
-    }
 
 }
-*/

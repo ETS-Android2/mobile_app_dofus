@@ -98,12 +98,13 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
     private static final String KEY_PERSO_ID = "perso_id";
     private static final String KEY_JOB_ID = "job_id";
 
-    // USER Table
+    // USER Tablep
 
     // OBJEC Table
     private static final String KEY_OBJEC_NAME = "objectif_nom";
     private static final String KEY_OBJEC_CONTENT = "objectif_content";
     private static final String KEY_OBJEC_DATE = "obj_date";
+    private static final String KEY_OBJEC_USERID = "obj_date";
 
     // OBJEC_USER Table
     //todo user+user_obj
@@ -180,6 +181,7 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
             + KEY_OBJEC_NAME + " TEXT,"
             + KEY_OBJEC_DATE + " DATETIME,"
             + KEY_OBJEC_CONTENT + " TEXT,"
+            + KEY_OBJEC_USERID + " INTEGER,"
             + KEY_CREATED_AT + " DATETIME " + ");";
 
 

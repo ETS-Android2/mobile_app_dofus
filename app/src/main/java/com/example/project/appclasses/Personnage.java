@@ -72,7 +72,7 @@ public class Personnage implements Serializable {
 	*@param p the character to copy
 	**/
 	public Personnage(Personnage p) {
-		this(p.id, p.name, p.level, p.sex, p.cla, p.success, null, p.carac, p.server, p.desc);
+		this(p.id, p.name, p.level, p.sex, p.cla, p.success, null, null, p.server, p.desc);
 		List<Job> jo = new ArrayList<Job>();
 		for (Job j : p.getJob()){
 		    jo.add(new Job(j.getName(), j.getLevel()));
@@ -80,6 +80,9 @@ public class Personnage implements Serializable {
         Job[] a = new Job[jo.size()];
         a = jo.toArray(a);
 		this.setJob(a);
+
+		int[] c = { p.carac[0], p.carac[1], p.carac[2], p.carac[3]};
+		this.setCarac(c);
 	}
 
 
