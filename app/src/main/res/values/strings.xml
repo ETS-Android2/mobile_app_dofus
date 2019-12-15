@@ -41,5 +41,7 @@
     <!-- Display perso -->
     <string name="share">share</string>
     <string name="edit">Edit</string>
+    <string name="wait">Please wait</string>
+    <string name="load">The application is preparing itself...</string>
 
 </resources>
