@@ -356,7 +356,7 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
 
     public List<String> getObjIntroH(){
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "Select a."+KEY_ID + ", " + KEY_OBJEC_NAME+" FROM " + TABLE_OBJEC; // +" a INNER JOIN " +TABLE_CLASSE +" b ON a."+ KEY_CLASSE_ID+" = b."+KEY_ID;
+        String query = "Select a."+KEY_ID + ", " + KEY_OBJEC_NAME+" FROM " + TABLE_OBJEC; // + " WHERE " + KEY_OBJEC_USERID +" = ? ";
         Cursor cursor = db.rawQuery(query, null);
         List<String> u = new ArrayList<String>();
         for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {

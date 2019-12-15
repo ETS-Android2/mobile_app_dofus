@@ -21,10 +21,10 @@ public class DisplayObj extends AppCompatActivity {
         Intent inte = getIntent();
         String _id = inte.getStringExtra("id_obj");
         dis = (TextView) findViewById(R.id.textView5);
-        dis.setText(showPerso(Integer.parseInt(_id)));
+        dis.setText(showObj(Integer.parseInt(_id)));
     }
 
-    public String showPerso(int id){
+    public String showObj(int id){
         DofusMDBHandler dbHandler = new DofusMDBHandler(this);
 
         // Objectif o = dbHandler.findObjHandler(Integer.toString(id));
