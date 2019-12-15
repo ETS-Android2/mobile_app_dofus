@@ -43,12 +43,6 @@ public class PersoPerso extends AppCompatActivity {
         c7 = (EditText) findViewById(R.id.pers7);
         c8 = (EditText) findViewById(R.id.pers8);
         dbHandler = new DofusMDBHandler(this);
-        List<String> sex = findSex();
-        List<String> classes = findClasse();
-        ArrayAdapter<String> adaptersex = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, sex);
-        ArrayAdapter<String> adapterclass = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, classes);
-        c3.setAdapter(adaptersex);
-        c4.setAdapter(adapterclass);
     }
 
     public void drop(View view) {
@@ -56,45 +50,5 @@ public class PersoPerso extends AppCompatActivity {
         dbHandler.dropH(1,1);
     }
 
-    public void addPerso(View view) {
-       // String name = c1.getText().toString();
-       // int level = Integer.parseInt(lvl.getText().toString());
-       // Classes cla = Classes.valueOf(classe.getText().toString());
-        //int suc = Integer.parseInt(success.getText().toString());
-        //Job jo = new Job(JobEnum.valueOf(job.getText().toString()), 0);
 
-        Personnage perso = new Personnage(); //0,name,level, sex, cla, suc, jo, car, serv, desc);
-        long _id = dbHandler.addPersoHandler(perso);
-
-
-        c1.setText(Long.toString(_id));
-
-    }
-
-    public void delPerso(View view){
-        int id = 0;
-        try { id = Integer.parseInt(c1.getText().toString().trim());}
-        catch (NumberFormatException e){
-        }
-        dbHandler.deletePersoHandler(id);
-    }
-
-    public void findPerso(View view){
-        int id = 0;
-        try { id = Integer.parseInt(c1.getText().toString().trim());}
-        catch (NumberFormatException e){
-        }
-        Personnage p = dbHandler.findPersoHandler(Integer.toString(id));
-        //c1.setText(p.getName());
-        c8.setText(p.getDesc());
-    }
-
-    public List<String> findSex(){
-        DofusMDBHandler dbHandler = new DofusMDBHandler(this);
-        return dbHandler.getSexHandler();
-    }
-
-    public List<String> findClasse(){
-        return dbHandler.getClassHandler();
-    }
 }

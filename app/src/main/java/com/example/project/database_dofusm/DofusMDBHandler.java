@@ -342,6 +342,47 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
         return db.update(TABLE_PERSO, values, where ,whereargs) > 0;
     }
 
+    /**
+     * checks if a given username is presnt in the database
+     * */
+    public boolean checklog(String name){
+        boolean ispresent = false;
+        try {
+            SQLiteDatabase db = this.getWritableDatabase();
+            String query = "Select "+ KEY_USERNAME +  " FROM " + TABLE_USER + " WHERE "+ KEY_USERNAME +" =?";
+            String[] args = {name};
+            Cursor cursor = db.rawQuery(query, args);
+            ispresent = true;
+            cursor.close();
+        }
+        catch(Exception e){}
+        return ispresent;
+    }
+
+
+    /**
+     * checks if the username and the password are correct
+     * */
+    public boolean matches(String username, String pass){
+        boolean ok = false;
+        try {
+            SQLiteDatabase db = this.getWritableDatabase();
+            String query = "Select "+ KEY_PASSWORD +  " FROM " + TABLE_USER + " WHERE "+ KEY_USERNAME +" =?";
+            String[] args = {username};
+            Cursor cursor = db.rawQuery(query, args);
+            if (cursor.getCount() == 1){
+                ok = cursor.getString(cursor.getColumnIndex(KEY_PASSWORD)).equals(pass);
+            }
+            cursor.close();
+        }catch (Exception e){}
+
+        return ok;
+    }
+
+    /**
+     *
+     *
+     * */
     public List<String> getPersName(){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "Select a."+KEY_ID + ", " + KEY_NAME+", "+ KEY_LEVEL +", "+ KEY_CLASSE_NAME + " FROM " + TABLE_PERSO +" a INNER JOIN " +TABLE_CLASSE +" b ON a."+ KEY_CLASSE_ID+" = b."+KEY_ID;

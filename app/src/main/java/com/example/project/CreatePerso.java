@@ -3,6 +3,7 @@ package com.example.project;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -60,6 +61,11 @@ public class CreatePerso extends AppCompatActivity {
         setContentView(R.layout.activity_create_perso);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        try{
+            Intent inte = getIntent();
+            String _id = inte.getStringExtra("id_perso");
+        }catch (Exception e){}
+
         et1 = (EditText) findViewById(R.id.editText);
         et2 = (EditText) findViewById(R.id.editText2);
         s1 = (Spinner) findViewById(R.id.spinner3);
