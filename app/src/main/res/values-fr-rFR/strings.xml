@@ -22,4 +22,6 @@
     <string name="main_menu_button3">Actualités du jeu</string>
     <string name="main_menu_button4">Se connecter</string>
     <string name="news_menu_headtitle">Actualités du jeu</string>
+    <string name="wait">Merci de patienter</string>
+    <string name="load">L\'application se prépare...</string>
 </resources>

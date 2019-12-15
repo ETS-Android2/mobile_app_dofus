@@ -2,8 +2,10 @@ package com.example.project;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.webkit.WebView;
 
 public class loadingActivity extends AppCompatActivity {
@@ -12,12 +14,24 @@ public class loadingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
+        ProgressDialog pd;
+        pd = ProgressDialog.show(this,getString(R.string.wait), getString(R.string.load), false, true);
+        pd.setCanceledOnTouchOutside(false);
 
-        WebView webView = (WebView) findViewById(R.id.imageWebView);
-        String  data    = "<body> <img style=\"text-align:center;width:100;height:100;\" src = \"file:///android_asset/loading.gif\"/></body>";
-        webView.loadDataWithBaseURL("file:///android_asset/",data,"text/html","UTF-8",null);
+        new Handler().postDelayed(new Runnable(){
+            @Override
+            public void run() {
+                /* Create an Intent that will start the Menu-Activity. */
+                Intent mainIntent = new Intent(loadingActivity.this,MainActivity.class);
+                loadingActivity.this.startActivity(mainIntent);
+                loadingActivity.this.finish();
+                Intent menu = new Intent(loadingActivity.this, MainMenu.class);
+                startActivity(menu);
 
-        finish();
+            }
+        }, 3000);
+
+
 
     }
 
