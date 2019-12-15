@@ -15,6 +15,8 @@ import com.example.project.database_dofusm.DofusMDBHandler;
 public class DisplayObj extends AppCompatActivity {
 
     private TextView dis;
+    private TextView dis2;
+    private TextView dis3;
     public static final String PREFS_NAME = "MyPrefsFile";
 
     @Override
@@ -36,15 +38,24 @@ public class DisplayObj extends AppCompatActivity {
         Intent inte = getIntent();
         String _id = inte.getStringExtra("id_obj");
         dis = (TextView) findViewById(R.id.textView4);
-        dis.setText(showObj(Integer.parseInt(_id)));
+
+        String [] a = showObj(Integer.parseInt(_id));
+
+        dis2 = (TextView) findViewById(R.id.textView6);
+        dis3 = (TextView) findViewById(R.id.textView7);
+
+        dis.setText(a[0]);
+
+        dis2.setText(a[1]);
+        dis3.setText(a[2]);
     }
 
-    public String showObj(int id){
+    public String[] showObj(int id){
         DofusMDBHandler dbHandler = new DofusMDBHandler(this);
         Objectives o = dbHandler.findObjHandler(Integer.toString(id));
         refreshScreen();
-        String obj = o.toString();
-        return obj;
+        String [] a =  {o.getTitle(), o.getDate(), o.getContent()};
+        return a;
     }
 
     public void refreshScreen(){
