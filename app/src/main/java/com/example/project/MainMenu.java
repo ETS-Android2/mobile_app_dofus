@@ -52,4 +52,11 @@ public class MainMenu extends AppCompatActivity {
         startActivity(loginActivity);
 
     }
+    public void myObj(View view){
+
+        Intent loginActivity = new Intent(MainMenu.this, MyObj.class);
+        startActivity(loginActivity);
+
+    }
+
 }
