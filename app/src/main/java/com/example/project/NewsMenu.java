@@ -1,51 +1,113 @@
+/*source http://www.anddev.org/parsing_xml_from_the_net_-_using_the_saxparser-t353.html*/
 package com.example.project;
 
-import androidx.appcompat.app.AppCompatActivity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.ListView;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.ArrayAdapter;
-
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class NewsMenu extends AppCompatActivity {
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.StrictMode;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+
+public class NewsMenu extends Activity {
+
+    private final String MY_DEBUG_TAG = "rss";
     private ListView mListView;
-    private String[] prenoms = new String[]{
-            "Antoine", "Benoit", "Cyril", "David", "Eloise", "Florent",
-            "Gerard", "Hugo", "Ingrid", "Jonathan", "Kevin", "Logan",
-            "Mathieu", "Noemie", "Olivia", "Philippe", "Quentin", "Romain",
-            "Sophie", "Tristan", "Ulric", "Vincent", "Willy", "Xavier",
-            "Yann", "Zoé"
-    };
+    private String[][] actus = new String[2][10];
 
+    /** Called when the activity is first created. */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
         setContentView(R.layout.activity_news_menu);
 
-        mListView = (ListView) findViewById(R.id.listView);
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy =
+                    new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
 
-        //android.R.layout.simple_list_item_1 est une vue disponible de base dans le SDK android,
-        //Contenant une TextView avec comme identifiant "@android:id/text1"
+        actus[0][0] = "Pas de nouvelles actualités";
+        actus[1][0] = "Pas de nouvelles actualités";
 
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(NewsMenu.this,
-                android.R.layout.simple_list_item_1, prenoms);
-        mListView.setAdapter(adapter);
+        /* Create a new TextView to display the parsingresult later. */
+        TextView tv = new TextView(this);
+        RSSHandler myExampleHandler = new RSSHandler();
+
+        try {
+            /* Create a URL we want to load some xml-data from. */
+            URL url = new URL("https://www.dofus.com/fr/rss/news.xml");
+
+            /* Get a SAXParser from the SAXPArserFactory. */
+            SAXParserFactory spf = SAXParserFactory.newInstance();
+            SAXParser sp = spf.newSAXParser();
+
+            /* Get the XMLReader of the SAXParser we created. */
+            XMLReader xr = sp.getXMLReader();
+            /* Create a new ContentHandler and apply it to the XML-Reader*/
+            xr.setContentHandler(myExampleHandler);
+
+            /* Parse the xml-data from our URL. */
+            xr.parse(new InputSource(url.openStream()));
+            /* Parsing has finished. */
+
+
+            NewsDataSet parsedNews = null;
+            for(int i = 0; i<10;i ++){
+
+                parsedNews = myExampleHandler.getParsedData(i);
+                actus[0][i] = parsedNews.toString();
+                actus[1][i] = parsedNews.getUrl();
+
+            }
+
+            mListView = (ListView) findViewById(R.id.listView);
+            final ArrayAdapter<String> adapter = new ArrayAdapter<String>(NewsMenu.this,
+                    android.R.layout.simple_list_item_1, actus[0]);
+            mListView.setAdapter(adapter);
+
+            mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                @Override
+                public void onItemClick(AdapterView<?> parent, final View view,
+                                        int position, long id) {
+                    Uri uri = Uri.parse(actus[1][position]);
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    // Verify that the intent will resolve to an activity
+                    if (intent.resolveActivity(getPackageManager()) != null) {
+                        // Here we use an intent without a Chooser unlike the next example
+                        startActivity(intent);
+                    }
+                }
+
+            });
+        }
+        catch (Exception e) {
+            /* Display any Error to the GUI. */
+            tv.setText("Error: " + e.getMessage());
+            Log.e(MY_DEBUG_TAG, "rss", e);
+        }
     }
+
+
 
     public void refreshClick (View v){
         Intent intent = getIntent();
         finish();
         startActivity(intent);
     }
-
 }
