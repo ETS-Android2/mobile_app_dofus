@@ -5,16 +5,18 @@ import com.example.project.enumdofusm.JobEnum;
 import com.example.project.enumdofusm.Servers;
 import com.example.project.enumdofusm.Sex;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Personnage {
+public class Personnage implements Serializable {
 
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////				Attributes		                 ////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	static final long serialVersionUID = 1;
 	private int id;
 	private String name;
 	private int level;

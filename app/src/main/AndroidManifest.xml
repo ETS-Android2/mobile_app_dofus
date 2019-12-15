@@ -27,6 +27,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MainMenu"
+            android:label="@string/title_activity_my_perso"
             android:theme="@style/AppTheme.ActionBar" />
         <activity android:name=".MainActivity">
             <intent-filter>

@@ -326,6 +326,10 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
         return getListAttrHandler(KEY_SERVER_NAME, TABLE_SERVER);
     }
 
+    public List<String> getJobHandler(){
+        return getListAttrHandler(KEY_JOBNAME_NAME, TABLE_JOBNAME);
+    }
+
     public List<String> getListAttrHandler(String attr, String table){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "Select "+ attr+ " FROM " + table;
@@ -336,6 +340,7 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
         }
         cursor.close();
         db.close();
+        Log.v(LOG, u.toString());
         return u;
     }
 
