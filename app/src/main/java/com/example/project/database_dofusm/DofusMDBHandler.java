@@ -99,6 +99,8 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
     private static final String KEY_JOB_ID = "job_id";
 
     // USER Tablep
+    private static final String KEY_USERNAME = "username";
+    private static final String KEY_PASSWORD = "password";
 
     // OBJEC Table
     private static final String KEY_OBJEC_NAME = "objectif_nom";
@@ -184,6 +186,13 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
             + KEY_OBJEC_USERID + " INTEGER,"
             + KEY_CREATED_AT + " DATETIME " + ");";
 
+    // USER table create statement
+    private static final String CREATE_TABLE_USER = "CREATE TABLE "
+            + TABLE_USER + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + KEY_USERNAME + " TEXT,"
+            + KEY_PASSWORD + " PASSWORD,"
+            + KEY_CREATED_AT + " DATETIME" + ");";
+
 
 
     public DofusMDBHandler(Context context) {
@@ -193,6 +202,7 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         // creating required
+        db.execSQL(CREATE_TABLE_USER);
         db.execSQL(CREATE_TABLE_OBJEC);
         db.execSQL(CREATE_TABLE_JOB);
         db.execSQL(CREATE_TABLE_JOB_PERSO);
@@ -212,6 +222,7 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // on upgrade drop older tables
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_OBJEC);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_JOB);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_JOB_PERSO);
