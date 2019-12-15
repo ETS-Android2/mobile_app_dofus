@@ -479,25 +479,28 @@ public class DofusMDBHandler extends SQLiteOpenHelper {
         }
         cursor.close();
 
-        query = "Select "+ KEY_CARAC_ID +" FROM " + TABLE_PERSO + " WHERE " + KEY_PERSO_ID + "= '" + ID + "'";
-        cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst()){
-            a = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_CARAC_ID)));
-            db.delete(TABLE_CARAC, KEY_ID + "=?",
-                    new String[] {
-                            String.valueOf(a)
-                    });
-        }
-        cursor.close();
+        try {
+            String query2 = "Select " + KEY_CARAC_ID + " FROM " + TABLE_PERSO + " WHERE " + KEY_PERSO_ID + " = ? ";
+            String[] argum = {"" + ID};
+            Cursor cursor2 = db.rawQuery(query2, argum);
+            if (cursor2.moveToFirst()) {
+                a = Integer.parseInt(cursor2.getString(cursor2.getColumnIndex(KEY_CARAC_ID)));
+                db.delete(TABLE_CARAC, KEY_ID + "=?",
+                        new String[]{
+                                String.valueOf(a)
+                        });
+            }
+
+            cursor2.close();
+        }catch(Exception e) {}
 
         query = "Select * FROM " + TABLE_PERSO + " WHERE " + KEY_ID + "= '" + ID + "'";
         cursor = db.rawQuery(query, null);
-        Personnage perso = new Personnage();
         if (cursor.moveToFirst()) {
             Integer.parseInt(cursor.getString(0));
             db.delete(TABLE_PERSO, KEY_ID + "=?",
                     new String[] {
-                            String.valueOf(perso.getId())
+                            ID+""
                     });
             cursor.close();
             result = true;
